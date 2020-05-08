@@ -14,7 +14,7 @@ const exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
-const routes = require("./routes/restaurant_routes");
+const routes = require("./routes/restaurant_routes.js");
 
 app.use(routes);
 
