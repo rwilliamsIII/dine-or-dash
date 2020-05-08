@@ -1,3 +1,7 @@
 DROP DATABASE IF EXISTS restaurants;
 
-CREATE DATABASE restaurants;
+CREATE DATABASE restaurants
+
+CREATE TABLE {
+    I AM GREAT, NULL
+}
