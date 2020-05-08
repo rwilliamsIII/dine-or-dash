@@ -1,5 +1,3 @@
-DROP DATABASE IF EXISTS restaurants;
-
 CREATE DATABASE restaurants;
 
 USE DATABASE restaurants;
@@ -19,3 +17,4 @@ CREATE TABLE liked
     rest_address VARCHAR(255),
     favorite BOOLEAN default false
 );
+
