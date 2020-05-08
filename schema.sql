@@ -15,6 +15,7 @@ CREATE TABLE liked
 (
     id INT AUTO_INCREMENT,
     rest_name VARCHAR(255),
+    rest_pic VARBINARY(8000)
     phone_number INT(255),
     rest_address VARCHAR(255),
     favorite BOOLEAN default false
