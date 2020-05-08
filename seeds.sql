@@ -1,0 +1,2 @@
+USE DATABASE restaurants;
+
