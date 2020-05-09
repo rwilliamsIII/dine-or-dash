@@ -1,18 +1,18 @@
-CREATE DATABASE restaurants;
+CREATE DATABASE restaurant_db;
 
-USE DATABASE restaurants;
+USE restaurant_db;
 
 CREATE TABLE disliked
 (
-    id INT AUTO_INCREMENT,
-    disliked_name VARCHAR(255)
+    id VARCHAR(255),
+    alias VARCHAR(255)
     PRIMARY KEY (id)
 );
 
 CREATE TABLE liked
 (
-    id INT AUTO_INCREMENT,
-    rest_name VARCHAR(255),
+    id VARCHAR(255),
+    alias VARCHAR(255),
     rest_pic VARBINARY(8000)
     phone_number INT(255),
     rest_address VARCHAR(255),
