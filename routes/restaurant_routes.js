@@ -7,8 +7,7 @@ module.exports = function(app){
         
         app.post("/api/restaurants", function(req, res){
                 db.Restaurant.create({
-                        id: req.body.id,
-                        alias: req.body.alias
+                        id: req.body.id
                 }).then(function(dbRestaurant) {
                         res.json(dbRestaurant);
                         console.log(dbRestaurant);

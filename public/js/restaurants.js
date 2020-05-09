@@ -2,6 +2,7 @@
 
 var alias = "";
 var id = "";
+var restDiv = $(".restaurants")
 
 // Returns one random restaurant for the city
 function searchRestaurants() {
@@ -30,11 +31,26 @@ function searchRestaurants() {
     })
     .then(function(res){
         console.log(res);
+
         alias = res.businesses[0].alias;
         id = res.businesses[0].id;
+        var likeBtn = $("<button>").text("Dine!");
+        var dislikeBtn = $("<button>").text("Dash!");
+
+        likeBtn.on("click", function(){
+            sendID();
+        });
+
+        $("<h3>").text("Restaurant ID: " + id).appendTo(restDiv)
+        $("<h3>").text("Restaurant alias: " + alias).appendTo(restDiv)
+        likeBtn.appendTo(restDiv)
+        dislikeBtn.appendTo(restDiv)
+
+
+
         restaurantPhotos();
         getReviews();
-        sendID();
+        
     })    
 } 
 
