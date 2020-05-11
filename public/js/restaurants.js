@@ -1,5 +1,3 @@
-// /autocomplete --- to offer suggested restaurants
-
 var alias = "";
 var id = "";
 var restDiv = $(".restaurants")
@@ -84,14 +82,11 @@ function restaurantPhotos() {
         }
     })
         .then(function(res){
-            // photoArray = [];
-            // for (vari=0;i<res.)
             console.log(res);
         })
 } 
 
 function getReviews() {
-    // Replace everything after 'businesses/' with the alias variable from searchRestaurants call
     var reviewsURL = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/${alias}/reviews`;
     $.ajax({
         url: reviewsURL,
@@ -115,10 +110,23 @@ function sendID() {
     });
 }
 
+// Gets the users current location for use to display nearby options
+function geolocation() {
+    navigator.geolocation.getCurrentPosition(function(position) {
+    pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+    };
+    console.log(pos);
+    console.log(pos.lat);
+    })
+}
+
 $( document ).ready(function() {
     $("#search").on("click", function(event) {
         event.preventDefault();
         searchRestaurants();
         $("#city").val("");
     })
+    geolocation();
 });
