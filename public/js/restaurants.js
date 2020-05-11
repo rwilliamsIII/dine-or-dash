@@ -24,7 +24,7 @@ function searchRestaurants() {
         url: searchURL,
         method: "GET",
         headers: {
-            "Authorization": "Bearer FX7G_LW66z7oBdEKO1pNijgUXQbOknj073l6OGxkmIZ1XWT7J2isalDcZmqv0UC0CM0yj3Mgqkqs-STQDSeOtL-C_RWLhzMbFdV1xdFV5RCmWXPWZz81cMkThT1tXnYx",
+            "Authorization": "Bearer ???",
         }
     })
     .then(function(res){
@@ -62,7 +62,7 @@ function searchRestaurantsByID() {
         url: searchidURL,
         method: "GET",
         headers: {
-            "Authorization": "Bearer FX7G_LW66z7oBdEKO1pNijgUXQbOknj073l6OGxkmIZ1XWT7J2isalDcZmqv0UC0CM0yj3Mgqkqs-STQDSeOtL-C_RWLhzMbFdV1xdFV5RCmWXPWZz81cMkThT1tXnYx",
+            "Authorization": "Bearer ???",
         }
     })
     .then(function(res){
@@ -78,7 +78,7 @@ function restaurantPhotos() {
         url: photoURL,
         method: "GET",
         headers: {
-            "Authorization": "Bearer FX7G_LW66z7oBdEKO1pNijgUXQbOknj073l6OGxkmIZ1XWT7J2isalDcZmqv0UC0CM0yj3Mgqkqs-STQDSeOtL-C_RWLhzMbFdV1xdFV5RCmWXPWZz81cMkThT1tXnYx",
+            "Authorization": "Bearer ???",
         }
     })
         .then(function(res){
@@ -92,7 +92,7 @@ function getReviews() {
         url: reviewsURL,
         method: "GET",
         headers: {
-            "Authorization": "Bearer FX7G_LW66z7oBdEKO1pNijgUXQbOknj073l6OGxkmIZ1XWT7J2isalDcZmqv0UC0CM0yj3Mgqkqs-STQDSeOtL-C_RWLhzMbFdV1xdFV5RCmWXPWZz81cMkThT1tXnYx",
+            "Authorization": "Bearer ???",
         }
     })
         .then(function(res){
