@@ -13,102 +13,84 @@ var long;
 // Returns one random restaurant for the city
 function searchRestaurants() {
 
-    var city = $("#city").val().trim();
-    var lengthURL = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${city}&categories=restaurants`;
+    var offset = Math.floor(Math.random() * 500);
+    var searchURL = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${city}&categories=restaurants&limit=1&offset=${offset}`;
 
-    // Gets length of response
     $.ajax({
-        url: lengthURL,
+        url: searchURL,
         method: "GET",
+        cache: true,
         headers: {
             "Authorization": yelp,
         }
     })
     .then(function(res){
+        console.log(res);
+        name_biz = res.businesses[0].name;
+        alias = res.businesses[0].alias;
+        id = res.businesses[0].id;
+        picURL = res.businesses[0].image_url;
 
-        var offset = Math.floor(Math.random() * res.businesses.length);
-        var searchURL = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=${city}&categories=restaurants&limit=1&offset=${offset}`;
+        var likeBtn = $("<button>").text("Dine!");
+        var dislikeBtn = $("<button>").text("Dash!");
 
-        $.ajax({
-            url: searchURL,
-            method: "GET",
-            headers: {
-                "Authorization": yelp,
-            }
+        likeBtn.on("click", function(){
+            sendInfo();
+        });
+
+        dislikeBtn.on("click", function() {
+            searchRestaurants();
         })
-        .then(function(res){
-            console.log(res);
-            name_biz = res.businesses[0].name;
-            alias = res.businesses[0].alias;
-            id = res.businesses[0].id;
-            picURL = res.businesses[0].image_url;
+        $("<h3>").text("Restaurant ID: " + id).appendTo(restDiv)
+        $("<h3>").text("Restaurant alias: " + name_biz).appendTo(restDiv)
+        likeBtn.appendTo(restDiv)
+        dislikeBtn.appendTo(restDiv)
 
-            var likeBtn = $("<button>").text("Dine!");
-            var dislikeBtn = $("<button>").text("Dash!");
-
-            likeBtn.on("click", function(){
-                sendInfo();
-            });
-
-            $("<h3>").text("Restaurant ID: " + id).appendTo(restDiv)
-            $("<h3>").text("Restaurant alias: " + name_biz).appendTo(restDiv)
-            likeBtn.appendTo(restDiv)
-            dislikeBtn.appendTo(restDiv)
-
-            restaurantPhotos();
-            getReviews();
-            
-        })    
-    })
+        restaurantPhotos();
+        getReviews();
+        
+    })    
 }
 
 // Returns one random restaurant near the coordinates of the user
 function nearbyRestaurants() {
 
-    var lengthURL = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?latitude=${lat}&longitude=${long}&categories=restaurants`
+    var offset = Math.floor(Math.random() * 500);
+    var searchCoordinatesURL = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?latitude=${lat}&longitude=${long}&categories=restaurants&limit=1&offset=${offset}`;
 
     $.ajax({
-        url: lengthURL,
+        url: searchCoordinatesURL,
         method: "GET",
+        cache: true,
         headers: {
             "Authorization": yelp,
         }
     })
     .then(function(res){
-        var offset = Math.floor(Math.random() * res.businesses.length);
-        var searchCoordinatesURL = `https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?latitude=${lat}&longitude=${long}&categories=restaurants&limit=1&offset=${offset}`;
-    
-        $.ajax({
-            url: searchCoordinatesURL,
-            method: "GET",
-            headers: {
-                "Authorization": yelp,
-            }
-        })
-        .then(function(res2){
-            console.log(res2);
-            name_biz = res2.businesses[0].name;
-            alias = res2.businesses[0].alias;
-            id = res2.businesses[0].id;
-            picURL = res.businesses[0].image_url;
+        console.log(res);
+        name_biz = res.businesses[0].name;
+        alias = res.businesses[0].alias;
+        id = res.businesses[0].id;
+        picURL = res.businesses[0].image_url;
 
-            var likeBtn = $("<button>").text("Dine!");
-            var dislikeBtn = $("<button>").text("Dash!");
-    
-            likeBtn.on("click", function(){
-                sendInfo();
-            });
-    
-            $("<h3>").text("Restaurant ID: " + id).appendTo(restDiv)
-            $("<h3>").text("Restaurant alias: " + name_biz).appendTo(restDiv)
-            likeBtn.appendTo(restDiv)
-            dislikeBtn.appendTo(restDiv)
-    
-            restaurantPhotos();
-            getReviews();
-            
-        })    
-    });
+        var likeBtn = $("<button>").text("Dine!");
+        var dislikeBtn = $("<button>").text("Dash!");
+
+        likeBtn.on("click", function(){
+            sendInfo();
+        });
+        dislikeBtn.on("click", function() {
+            nearbyRestaurants();
+        })
+        $("<h3>").text("Restaurant ID: " + id).appendTo(restDiv)
+        $("<h3>").text("Restaurant alias: " + name_biz).appendTo(restDiv)
+        likeBtn.appendTo(restDiv)
+        dislikeBtn.appendTo(restDiv)
+
+        restaurantPhotos();
+        getReviews();
+        
+    })    
 } 
 
 // Returns a city by using the id stored in mysql
@@ -120,6 +102,7 @@ function searchRestaurantsByID() {
     $.ajax({
         url: searchidURL,
         method: "GET",
+        cache: true,
         headers: {
             "Authorization": yelp,
         }
@@ -137,6 +120,7 @@ function restaurantPhotos() {
     $.ajax({
         url: photoURL,
         method: "GET",
+        cache: true,
         headers: {
             "Authorization": yelp,
         }
@@ -152,6 +136,7 @@ function getReviews() {
     $.ajax({
         url: reviewsURL,
         method: "GET",
+        cache: true,
         headers: {
             "Authorization": yelp,
         }
@@ -170,6 +155,7 @@ function getCoordinates() {
     };
     lat = pos.lat;
     long = pos.lng;
+    $("#proximity").attr("disabled", false);
     })
 }
 
@@ -180,6 +166,7 @@ function geolocation() {
     
     $.ajax({
         url: googleMapsURL,
+        cache: true,
         method: "GET",
     })
     .then(function(res){
@@ -206,6 +193,7 @@ function sendInfo() {
 function getKeysAndLocation() {
     $.ajax("/api/keys", {
     type: "GET",
+    cache: true,
     }).then(
     function(res) {
         yelp = res[0];
@@ -227,5 +215,5 @@ $( document ).ready(function() {
         searchRestaurants();
         $("#city").val("");
     })
-
+    
 });
