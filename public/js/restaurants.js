@@ -1,6 +1,9 @@
-var alias = "";
-var id = "";
+var alias;
+var id;
 var restDiv = $(".restaurants")
+var pos;
+var yelp;
+var maps;
 
 // Returns one random restaurant for the city
 function searchRestaurants() {
@@ -24,7 +27,7 @@ function searchRestaurants() {
         url: searchURL,
         method: "GET",
         headers: {
-            "Authorization": "Bearer ???",
+            "Authorization": yelp,
         }
     })
     .then(function(res){
@@ -44,8 +47,6 @@ function searchRestaurants() {
         likeBtn.appendTo(restDiv)
         dislikeBtn.appendTo(restDiv)
 
-
-
         restaurantPhotos();
         getReviews();
         
@@ -62,7 +63,7 @@ function searchRestaurantsByID() {
         url: searchidURL,
         method: "GET",
         headers: {
-            "Authorization": "Bearer ???",
+            "Authorization": yelp,
         }
     })
     .then(function(res){
@@ -78,7 +79,7 @@ function restaurantPhotos() {
         url: photoURL,
         method: "GET",
         headers: {
-            "Authorization": "Bearer ???",
+            "Authorization": yelp,
         }
     })
         .then(function(res){
@@ -92,7 +93,7 @@ function getReviews() {
         url: reviewsURL,
         method: "GET",
         headers: {
-            "Authorization": "Bearer ???",
+            "Authorization": yelp,
         }
     })
         .then(function(res){
@@ -110,6 +111,17 @@ function sendID() {
     });
 }
 
+// Gets the keys from server side
+function getKeys() {
+    $.ajax("/api/keys", {
+    type: "GET",
+    }).then(
+    function(res) {
+        yelp = res[0];
+        maps = res[1];
+    });
+}
+
 // Gets the users current location for use to display nearby options
 function geolocation() {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -122,11 +134,28 @@ function geolocation() {
     })
 }
 
+// Sets up the ability to use geolocation from google maps
+function setupGeolocation() {
+
+    var googleMapsURL = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/js?key=${maps}`;
+    
+    $.ajax({
+        url: googleMapsURL,
+        method: "GET",
+    })
+    .then(function(res){
+        geolocation();
+    })    
+} 
+
 $( document ).ready(function() {
+
+    getKeys();
+
     $("#search").on("click", function(event) {
         event.preventDefault();
         searchRestaurants();
         $("#city").val("");
     })
-    geolocation();
+
 });
