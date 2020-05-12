@@ -26,15 +26,23 @@ function searchRestaurants() {
     })
     .then(function(res){
         console.log(res);
+
         name_biz = res.businesses[0].name;
         alias = res.businesses[0].alias;
         id = res.businesses[0].id;
         picURL = res.businesses[0].image_url;
 
+
         var likeBtn = $("<button>").text("Dine!");
         var dislikeBtn = $("<button>").text("Dash!");
 
+        var newLikedRest = {
+            id: restId,
+            rest_name: restName
+        };
+
         likeBtn.on("click", function(){
+
             sendInfo();
         });
 
@@ -43,6 +51,7 @@ function searchRestaurants() {
         })
         $("<h3>").text("Restaurant ID: " + id).appendTo(restDiv)
         $("<h3>").text("Restaurant alias: " + name_biz).appendTo(restDiv)
+
         likeBtn.appendTo(restDiv)
         dislikeBtn.appendTo(restDiv)
 
@@ -174,6 +183,7 @@ function geolocation() {
     })    
 } 
 
+
 // Sends the info to be saved to the database for future searches
 function sendInfo() {
     var info = [];
@@ -201,6 +211,7 @@ function getKeysAndLocation() {
         geolocation();
     });
 }
+
 
 $( document ).ready(function() {
     // Runs immediately to have info available before they start searching, prevents sync timing errors
