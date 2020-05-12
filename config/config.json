@@ -1,9 +1,9 @@
 {
     "development": {
       "username": "root",
-      "password": "bear",
+      "password": "password",
       "database": "restaurant_db",
-      "host": "127.0.0.1",
+      "host": "localhost",
       "port": 3306,
       "dialect": "mysql"
     },
