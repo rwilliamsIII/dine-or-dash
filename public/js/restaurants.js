@@ -32,17 +32,23 @@ function searchRestaurants() {
     .then(function(res){
         console.log(res);
 
-        alias = res.businesses[0].alias;
-        id = res.businesses[0].id;
+        var restName = res.businesses[0].name;
+        var restId = res.businesses[0].id;
         var likeBtn = $("<button>").text("Dine!");
         var dislikeBtn = $("<button>").text("Dash!");
 
+        var newLikedRest = {
+            id: restId,
+            rest_name: restName
+        };
+
         likeBtn.on("click", function(){
-            sendID();
+            sendRest(newLikedRest);
+            console.log(newLikedRest);
         });
 
-        $("<h3>").text("Restaurant ID: " + id).appendTo(restDiv)
-        $("<h3>").text("Restaurant alias: " + alias).appendTo(restDiv)
+        $("<p class='restId'>").text("Restaurant ID: " + restId).appendTo(restDiv)
+        $("<p class='restName'>").text("Restaurant name: " + restName).appendTo(restDiv)
         likeBtn.appendTo(restDiv)
         dislikeBtn.appendTo(restDiv)
 
@@ -105,15 +111,13 @@ function getReviews() {
         })
 } 
 
+
 // Sends the id from one of the previous yelp calls to the database, so it can be sent back to display the favorites page
-function sendID() {
-    $.ajax("/api/restaurants/" + id, {
-    type: "POST",
-    }).then(
-    function() {
-        console.log("Restaurant id: ", id);
-    });
-}
+function sendRest(Restaurant) {
+        $.post("/api/posts/", Restaurant, function() {
+          console.log("Restaurant added!");
+        });
+      }
 
 $( document ).ready(function() {
     $("#search").on("click", function(event) {
