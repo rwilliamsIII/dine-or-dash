@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 5000;
 
 var app = express();
 
-const db = require("./models");
+// const db = require("./models");
 
 app.use(express.static("public"));
 
