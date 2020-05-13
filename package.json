@@ -28,5 +28,8 @@
     "passport": "^0.4.1",
     "path": "^0.12.7",
     "sequelize": "^5.21.7"
+  },
+  "devDependencies": {
+    "coffeescript": "^2.5.1"
   }
 }
