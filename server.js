@@ -17,9 +17,7 @@ const exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
-const routes = require("./routes/restaurant_routes.js");
-
-app.use(routes);
+require("./routes/restaurant_routes.js")(app);
 
 app.use(timeout(15000));
 app.use(haltOnTimeout);
