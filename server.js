@@ -3,7 +3,7 @@ const timeout = require("connect-timeout")
 
 const PORT = process.env.PORT || 5000;
 
-const app = express();
+var app = express();
 
 const db = require("./models");
 
