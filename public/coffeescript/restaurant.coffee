@@ -9,67 +9,76 @@ yelp = this
 maps = this
 lat = this
 long = this
-businessArray = []
-offset = this
 city = this
 cityCount = this
+offset = 0
+counter = 0
+restaurantArray = []
 
 # Searches restaurants based on the users entry
 searchRestaurants = ->
-    
-    offset = Math.floor(Math.random() * 500)
     $.ajax({
-        url: "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=#{city}&categories=restaurants&limit=1&offset=#{offset}"
+        url: "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=#{city}&categories=restaurants&limit=50&offset=#{offset}"
         method: "GET"
         cache: true
         headers: "Authorization": yelp
     }).then((res) ->
-        console.log(res)
-        name_biz = res.businesses[0].name
-        alias = res.businesses[0].alias
-        id = res.businesses[0].id
-        picURL = res.businesses[0].image_url
-        likeBtn = $("<button>").text("Dine!")
-        dislikeBtn = $("<button>").text("Dash!")
-        likeBtn.on "click", ->
-            city = JSON.parse(window.localStorage.getItem("City"))
-            searchRestaurants()
-        dislikeBtn.on "click", ->
-            searchRestaurants()
-        $("<h3>").text("Restaurant ID: " + id).appendTo(restDiv)
-        $("<h3>").text("Restaurant alias: " + name_biz).appendTo(restDiv)
+        console.log(restaurantArray)
+        count = 0
+        while count <= 50
+            if count == 50
+                offset = offset + 50
+                delay = (ms, func) -> setTimeout func, ms
+                return delay 100, -> searchRestaurants()
+            else
+                if res.businesses[count] != undefined
+                    restaurantArray.push(res.businesses[count])
+                    count++
+                else if res.businesses[count] == undefined
+                    return
+            if offset == 250
+                break
+        likeBtn = $("<button>").text("Dine!");
+        dislikeBtn = $("<button>").text("Dash!");
+        likeBtn.off('click').click (event) ->
+            randomSelection()
+        dislikeBtn.off('click').click (event) ->
+            randomSelection()
         likeBtn.appendTo(restDiv)
         dislikeBtn.appendTo(restDiv)
-        restaurantPhotos()
-        getReviews()
     )            
 
 # Nearby restaurants search function
 nearbyRestaurants = ->
-    offset = Math.floor(Math.random() * 500);
     $.ajax({
-        url: "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?latitude=#{lat}&longitude=#{long}&categories=restaurants&limit=1&offset=#{offset}"
+        url: "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?latitude=#{lat}&longitude=#{long}&categories=restaurants&limit=50&offset=#{offset}"
         method: "GET"
         cache: true
         headers: "Authorization": yelp
     }).then((res) ->
-        console.log(res)
-        name_biz = res.businesses[0].name
-        alias = res.businesses[0].alias
-        id = res.businesses[0].id
-        picURL = res.businesses[0].image_url
-        likeBtn = $("<button>").text("Dine!")
-        dislikeBtn = $("<button>").text("Dash!")
-        likeBtn.on "click",  ->
-            sendInfo()
-        dislikeBtn.on "click", ->
-            nearbyRestaurants()
-        $("<h3>").text("Restaurant ID: " + id).appendTo(restDiv)
-        $("<h3>").text("Restaurant alias: " + name_biz).appendTo(restDiv)
+        console.log(restaurantArray)
+        count = 0
+        while count <= 50
+            if count == 50
+                offset = offset + 50
+                delay = (ms, func) -> setTimeout func, ms
+                return delay 100, -> nearbyRestaurants()
+            else
+                if res.businesses[count] != undefined
+                    restaurantArray.push(res.businesses[count])
+                    count++
+                else if res.businesses[count] == undefined
+                    return
+            if offset == 250
+                break
+        likeBtn = $("<button>").text("Dine!");
+        dislikeBtn = $("<button>").text("Dash!");
+        likeBtn.off('click').click (event) ->
+            randomSelection()
+        dislikeBtn.off('click').click (event) ->
+            randomSelection()
         likeBtn.appendTo(restDiv)
         dislikeBtn.appendTo(restDiv)
-        restaurantPhotos()
-        getReviews()
     )       
 
 # Returns a city by using the id stored in mysql. Will want to pull the id from within this function likely
@@ -152,23 +161,34 @@ getKeysAndLocation = ->
         maps = "#{res[1]}"
         geolocation()
 
+# Sets the user's input to local storage in order to repeat search the same city
+# Might be redundant now with the new array method, in this case just move searchRestaurants() directly to the click event
 setCity = ->
     if $("#city").val().trim() != ""
         window.localStorage.clear()
+        city = $("#city").val().trim()
         cities = []
         cities.push($("#city").val().trim())
         localStorage.setItem("City", JSON.stringify(cities))
+        searchRestaurants()
     else 
         alert("You must enter a city! Or select nearby restaurants.")
+
+randomSelection = ->
+    selection = Math.floor(Math.random() * restaurantArray.length)
+    console.log(selection)
+    console.log(restaurantArray)
+    console.log(restaurantArray[selection])
+    restaurantArray.splice(selection, 1)
 
 $( document ).ready ->
     # Runs immediately to have info available before they start searching, prevents sync timing errors
     getKeysAndLocation()
     $("#proximity").click (event) ->
+        restaurantArray = []
         nearbyRestaurants()
     $("#search").click (event) ->
+        restaurantArray = []
         event.preventDefault()
-        city = $("#city").val().trim()
         setCity()
-        searchRestaurants()
         $("#city").val("")
