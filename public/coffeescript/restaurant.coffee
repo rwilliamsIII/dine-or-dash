@@ -9,10 +9,14 @@ yelp = this
 maps = this
 lat = this
 long = this
+businessArray = []
+offset = this
+city = this
+cityCount = this
 
 # Searches restaurants based on the users entry
 searchRestaurants = ->
-    city = $("#city").val().trim();
+    
     offset = Math.floor(Math.random() * 500)
     $.ajax({
         url: "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?location=#{city}&categories=restaurants&limit=1&offset=#{offset}"
@@ -28,7 +32,8 @@ searchRestaurants = ->
         likeBtn = $("<button>").text("Dine!")
         dislikeBtn = $("<button>").text("Dash!")
         likeBtn.on "click", ->
-            sendInfo()
+            city = JSON.parse(window.localStorage.getItem("City"))
+            searchRestaurants()
         dislikeBtn.on "click", ->
             searchRestaurants()
         $("<h3>").text("Restaurant ID: " + id).appendTo(restDiv)
@@ -147,6 +152,15 @@ getKeysAndLocation = ->
         maps = "#{res[1]}"
         geolocation()
 
+setCity = ->
+    if $("#city").val().trim() != ""
+        window.localStorage.clear()
+        cities = []
+        cities.push($("#city").val().trim())
+        localStorage.setItem("City", JSON.stringify(cities))
+    else 
+        alert("You must enter a city! Or select nearby restaurants.")
+
 $( document ).ready ->
     # Runs immediately to have info available before they start searching, prevents sync timing errors
     getKeysAndLocation()
@@ -154,5 +168,7 @@ $( document ).ready ->
         nearbyRestaurants()
     $("#search").click (event) ->
         event.preventDefault()
+        city = $("#city").val().trim()
+        setCity()
         searchRestaurants()
         $("#city").val("")
