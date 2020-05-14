@@ -14,6 +14,9 @@ cityCount = this
 offset = 0
 counter = 0
 restaurantArray = []
+geoConfirm = this
+delay = (ms, func) -> setTimeout func, ms
+geoID = this
 
 # Searches restaurants based on the users entry
 searchRestaurants = ->
@@ -28,7 +31,6 @@ searchRestaurants = ->
         while count <= 50
             if count == 50
                 offset = offset + 50
-                delay = (ms, func) -> setTimeout func, ms
                 return delay 100, -> searchRestaurants()
             else
                 if res.businesses[count] != undefined
@@ -36,7 +38,7 @@ searchRestaurants = ->
                     count++
                 else if res.businesses[count] == undefined
                     return
-            if offset == 250
+            if offset >= 100
                 break
         likeBtn = $("<button>").text("Dine!");
         dislikeBtn = $("<button>").text("Dash!");
@@ -56,12 +58,12 @@ nearbyRestaurants = ->
         cache: true
         headers: "Authorization": yelp
     }).then((res) ->
+        $("#proximity").remove()
         console.log(restaurantArray)
         count = 0
         while count <= 50
             if count == 50
                 offset = offset + 50
-                delay = (ms, func) -> setTimeout func, ms
                 return delay 100, -> nearbyRestaurants()
             else
                 if res.businesses[count] != undefined
@@ -69,7 +71,7 @@ nearbyRestaurants = ->
                     count++
                 else if res.businesses[count] == undefined
                     return
-            if offset == 250
+            if offset >= 100
                 break
         likeBtn = $("<button>").text("Dine!");
         dislikeBtn = $("<button>").text("Dash!");
@@ -119,18 +121,25 @@ getReviews = ->
 
 # Gets the users current location for use to display nearby options
 getCoordinates = ->
-    navigator.geolocation.getCurrentPosition((position) ->
+    options = {
+        enableHighAccuracy: false,
+        timeout: 5000,
+    }
+    error = (err) ->
+        console.log('ERROR(' + err.code + '): ' + err.message)
+    success = (position) ->
         pos = {
             lat: position.coords.latitude
             lng: position.coords.longitude
         }
+        console.log(position)
         lat = pos.lat
         long = pos.lng
-        $("#proximity").attr("disabled", false)
-    )
+        navigator.geolocation.clearWatch(id)
+    id = navigator.geolocation.watchPosition(success, error, options)
 
 # Sets up the ability to use geolocation from google maps
-geolocation = ->
+geolocate = ->
     $.ajax({
         url: "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/js?key=#{maps}"
         cache: true
@@ -154,12 +163,11 @@ sendInfo = ->
         console.log(res)
     )
 
-# Gets the keys from server side, and then user location
-getKeysAndLocation = ->
+# Gets the keys from server side
+getKeys = ->
     $.get "/api/keys", (res) ->
         yelp = "#{res[0]}"
         maps = "#{res[1]}"
-        geolocation()
 
 # Sets the user's input to local storage in order to repeat search the same city
 # Might be redundant now with the new array method, in this case just move searchRestaurants() directly to the click event
@@ -174,6 +182,7 @@ setCity = ->
     else 
         alert("You must enter a city! Or select nearby restaurants.")
 
+# Randomly selects a restaurant from the generated array of restaurants
 randomSelection = ->
     selection = Math.floor(Math.random() * restaurantArray.length)
     console.log(selection)
@@ -183,10 +192,22 @@ randomSelection = ->
 
 $( document ).ready ->
     # Runs immediately to have info available before they start searching, prevents sync timing errors
-    getKeysAndLocation()
+    getKeys()
     $("#proximity").click (event) ->
-        restaurantArray = []
-        nearbyRestaurants()
+        if JSON.parse(window.localStorage.getItem("Location Services")) != true
+            geoConfirm = confirm("This website is requesting your location to provide you with location based services.")
+            console.log(geoConfirm)
+            if geoConfirm == true
+                localStorage.setItem("Location Services", JSON.stringify(geoConfirm))
+                geolocate()
+                restaurantArray = []
+                return delay 4000, -> nearbyRestaurants()
+            else if geoConfirm == false
+                alert("Location services were denied, please enter a city.")
+        else if JSON.parse(window.localStorage.getItem("Location Services")) == true
+            geolocate()
+            restaurantArray = []
+            return delay 4000, -> nearbyRestaurants()
     $("#search").click (event) ->
         restaurantArray = []
         event.preventDefault()
