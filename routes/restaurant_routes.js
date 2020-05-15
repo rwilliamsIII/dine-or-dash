@@ -12,14 +12,14 @@ module.exports = function(app) {
                 keys.push(process.env.maps);
                 res.json(keys);
         });
-        // app.post("/api/restaurants", function(req, res){
-        //         db.Restaurant.create({
-        //                 id: req.body.id
-        //         }).then(function(dbRestaurant) {
-        //                 res.json(dbRestaurant);
-        //                 console.log(dbRestaurant);
-        //             });
-        //         });
+        app.post("/api/restaurants", function(req, res){
+                db.Restaurant.create({
+                        id: req.body.id
+                }).then(function(dbRestaurant) {
+                        res.json(dbRestaurant);
+                        console.log(dbRestaurant);
+                    });
+                });
 }
         
 

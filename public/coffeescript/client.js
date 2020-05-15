@@ -216,7 +216,7 @@
   sendInfo = function() {
     var info;
     info = [];
-    info.push(selection.id);
+    info.push(selection[0].id);
     info.push(selection[0].name);
     info.push(selection[0].image_url);
     console.log(info);
