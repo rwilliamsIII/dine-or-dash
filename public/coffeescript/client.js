@@ -74,8 +74,17 @@
           break;
         }
       }
+      cardDiv = $("<div class='ui card'>");
+      restImg = $("<img>");
+      restImg.attr("class", "image");
+      restImg.attr("src", res.Array[0].image_url);
+      cardContent = $("<div class='content'>");
+      restHeader = $("<p class='header'>").text(res.Array[0].name);
       likeBtn = $("<button>").text("Dine!");
       dislikeBtn = $("<button>").text("Dash!");
+      restHeader.appendTo(cardContent);
+      cardDiv.append(restImg, cardContent);
+      cardDiv.appendTo(restDiv);
       likeBtn.off('click').click(function(event) {
         randomSelection();
         return sendInfo();
@@ -83,8 +92,8 @@
       dislikeBtn.off('click').click(function(event) {
         return randomSelection();
       });
-      likeBtn.appendTo(restDiv);
-      return dislikeBtn.appendTo(restDiv);
+      likeBtn.appendTo(cardDiv);
+      return dislikeBtn.appendTo(cardDiv);
     });
   };
 
@@ -121,8 +130,17 @@
           break;
         }
       }
+      cardDiv = $("<div class='ui card'>");
+      restImg = $("<img>");
+      restImg.attr("class", "image");
+      restImg.attr("src", res.Array[0].image_url);
+      cardContent = $("<div class='content'>");
+      restHeader = $("<p class='header'>").text(res.Array[0].name);
       likeBtn = $("<button>").text("Dine!");
       dislikeBtn = $("<button>").text("Dash!");
+      restHeader.appendTo(cardContent);
+      cardDiv.append(restImg, cardContent);
+      cardDiv.appendTo(restDiv);
       likeBtn.off('click').click(function(event) {
         randomSelection();
         return sendInfo();
@@ -130,8 +148,8 @@
       dislikeBtn.off('click').click(function(event) {
         return randomSelection();
       });
-      likeBtn.appendTo(restDiv);
-      return dislikeBtn.appendTo(restDiv);
+      likeBtn.appendTo(cardDiv);
+      return dislikeBtn.appendTo(cardDiv);
     });
   };
 
