@@ -124,7 +124,8 @@
       likeBtn = $("<button>").text("Dine!");
       dislikeBtn = $("<button>").text("Dash!");
       likeBtn.off('click').click(function(event) {
-        return randomSelection();
+        randomSelection();
+        return sendInfo();
       });
       dislikeBtn.off('click').click(function(event) {
         return randomSelection();
@@ -219,7 +220,6 @@
     info.push(selection[0].id);
     info.push(selection[0].name);
     info.push(selection[0].image_url);
-    console.log(info);
     return $.post("/api/restaurants", {
       id: `${id}`,
       name_biz: `${name_biz}`,
