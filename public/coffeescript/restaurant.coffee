@@ -17,6 +17,7 @@ restaurantArray = []
 geoConfirm = this
 delay = (ms, func) -> setTimeout func, ms
 geoID = this
+selection = this
 
 # Searches restaurants based on the users entry
 searchRestaurants = ->
@@ -44,6 +45,7 @@ searchRestaurants = ->
         dislikeBtn = $("<button>").text("Dash!");
         likeBtn.off('click').click (event) ->
             randomSelection()
+            sendInfo()
         dislikeBtn.off('click').click (event) ->
             randomSelection()
         likeBtn.appendTo(restDiv)
@@ -77,6 +79,7 @@ nearbyRestaurants = ->
         dislikeBtn = $("<button>").text("Dash!");
         likeBtn.off('click').click (event) ->
             randomSelection()
+            sendInfo()
         dislikeBtn.off('click').click (event) ->
             randomSelection()
         likeBtn.appendTo(restDiv)
@@ -152,9 +155,9 @@ geolocate = ->
 # Sends the info to be saved to the database for future searches
 sendInfo = ->
     info = []
-    info.push(id)
-    info.push(name_biz)
-    info.push(picURL)
+    info.push(selection[0].id)
+    info.push(selection[0].name)
+    info.push(selection[0].image_url)
     $.post "/api/restaurants",
         id: "#{id}"
         name_biz: "#{name_biz}"
@@ -184,11 +187,11 @@ setCity = ->
 
 # Randomly selects a restaurant from the generated array of restaurants
 randomSelection = ->
-    selection = Math.floor(Math.random() * restaurantArray.length)
-    console.log(selection)
+    random = Math.floor(Math.random() * restaurantArray.length)
+    console.log(random)
     console.log(restaurantArray)
-    console.log(restaurantArray[selection])
-    restaurantArray.splice(selection, 1)
+    console.log(restaurantArray[random])
+    selection = restaurantArray.splice(random, 1)
 
 $( document ).ready ->
     # Runs immediately to have info available before they start searching, prevents sync timing errors
