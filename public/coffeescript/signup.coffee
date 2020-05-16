@@ -6,7 +6,7 @@ $("form.signup").submit (event) ->
         username: username.val().trim()
         password: password.val().trim()
     }
-    console.log(userData)
+
     if !userData.username || !userData.password
         return;
 
@@ -15,10 +15,10 @@ $("form.signup").submit (event) ->
     password.val("")
 
 signUpUser = (username, password) ->
-    $.post("/signup", {
+    $.post("/api/signup", {
       username: username,
       password: password
     })
       .then((data) ->
-        window.location.replace("/index")
+        window.location.replace("/login")
       )
