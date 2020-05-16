@@ -38,7 +38,7 @@ module.exports = function(app){
                 }).then(function(newRestaurant) {
                         res.json(newRestaurant);
                         console.log(newRestaurant);
-                        (err => res.status(404).json(err));
+                        (err => res.status(500).json(err));
 
                 })
         });
