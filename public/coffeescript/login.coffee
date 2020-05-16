@@ -21,5 +21,5 @@ loginUser = (username, password) ->
         password: password
     })
     .then((res) ->
-        window.location.replace("/")
+        window.location.replace("/index")
     )

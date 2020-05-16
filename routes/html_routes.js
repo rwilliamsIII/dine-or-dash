@@ -1,5 +1,4 @@
 var isAuthenticated = require("../config/authenticated");
-var path = require("path");
 
 module.exports = function(app) {
 
@@ -21,6 +20,6 @@ module.exports = function(app) {
     });
     // Renders the main page if user is authenticated
     app.get("/index", isAuthenticated, function(req, res) {
-        res.render("index");
+        res.render("index")
     });
 }
