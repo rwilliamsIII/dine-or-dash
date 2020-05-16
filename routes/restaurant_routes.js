@@ -49,14 +49,24 @@ module.exports = function(app) {
                 keys.push(process.env.maps);
                 res.json(keys);
         });
-        // app.post("/api/restaurants", function(req, res){
-        //         db.Restaurant.create({
-        //                 id: req.body.id
-        //         }).then(function(dbRestaurant) {
-        //                 res.json(dbRestaurant);
-        //                 console.log(dbRestaurant);
-        //             });
-        //         });
+        app.post("/api/restaurants", function(req, res){
+                db.Restaurant.create({
+                        id: req.body.id,
+                        name: req.body.name
+                }).then(function(newRestaurant) {
+                        res.json(newRestaurant);
+                        console.log(newRestaurant);
+                    });
+                });
+        app.post("/api/users", function(req, res){
+                db.User.create({
+                        username: req.body.username,
+                        password: req.body.password
+                }).then(function(newUser){
+                        res.json(newUser);
+                        console.log(newUser);
+                });
+        });
 }
         
 
