@@ -4,12 +4,14 @@ let passport = require("../config/passport");
 
 module.exports = function(app) {
         // Route to check the login credentials
-        // app.post("/api/login", passport.authenticate("local", { successRedirect: "/", failureRedirect: "/login" }));
-
+        // app.post("/api/login", passport.authenticate("local", { successRedirect: "/index", failureRedirect: "/login" }));
         app.post("/api/login", passport.authenticate("local"), function(req, res) {
                 res.json(req.user);
-                res.redirect("/index");
         });
+        // app.post("/api/login", passport.authenticate("local"), function(req, res) {
+        //         res.json(req.user);
+        //         res.redirect("/index");
+        // });
 
         // Logs the user out to the login page
         app.get("/logout", function(req, res) {

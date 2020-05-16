@@ -2,10 +2,10 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var db = require("../models");
 
-passport.use(new LocalStrategy(
+passport.use("local", new LocalStrategy(
     // User signs in with a username and a password
     {
-      username: "username"
+      username: "username",
     },
     function(username, password, done) {
       // When a user tries to sign in this code runs

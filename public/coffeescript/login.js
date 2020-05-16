@@ -25,7 +25,7 @@
       username: username,
       password: password
     }).then(function(res) {
-      return window.location.replace("/");
+      return window.location.replace("/index");
     });
   };
 
