@@ -74,20 +74,21 @@
           break;
         }
       }
-      cardDiv = $("<div class='ui card'>");
+      cardDiv = $("<div class='card'>");
       restImg = $("<img>");
-      restImg.attr("class", "image");
-      restImg.attr("src", res.Array[0].image_url);
-      cardContent = $("<div class='content'>");
-      restHeader = $("<p class='header'>").text(res.Array[0].name);
+      restImg.attr("class", "card-img-top");
+      restImg.attr("src", restaurantArray[0].image_url);
+      cardContent = $("<div class='card-body'>");
+      restHeader = $("<h5 class='card-title'>").text(restaurantArray[0].name);
       likeBtn = $("<button>").text("Dine!");
       dislikeBtn = $("<button>").text("Dash!");
       restHeader.appendTo(cardContent);
       cardDiv.append(restImg, cardContent);
       cardDiv.appendTo(restDiv);
       likeBtn.off('click').click(function(event) {
-        randomSelection();
-        return sendInfo();
+        sendInfo();
+
+        return randomSelection();
       });
       dislikeBtn.off('click').click(function(event) {
         return randomSelection();
@@ -130,20 +131,21 @@
           break;
         }
       }
-      cardDiv = $("<div class='ui card'>");
+      cardDiv = $("<div class='card' style='width: 25rem;'>");
       restImg = $("<img>");
-      restImg.attr("class", "image");
-      restImg.attr("src", res.Array[0].image_url);
-      cardContent = $("<div class='content'>");
-      restHeader = $("<p class='header'>").text(res.Array[0].name);
+      restImg.attr("class", "card-img-top");
+      restImg.attr("src", restaurantArray[0].image_url);
+      cardContent = $("<div class='card-body'>");
+      restHeader = $("<h5 class='card-title'>").text(restaurantArray[0].name);
       likeBtn = $("<button>").text("Dine!");
       dislikeBtn = $("<button>").text("Dash!");
       restHeader.appendTo(cardContent);
       cardDiv.append(restImg, cardContent);
       cardDiv.appendTo(restDiv);
       likeBtn.off('click').click(function(event) {
-        randomSelection();
-        return sendInfo();
+        sendInfo();
+
+        return randomSelection();
       });
       dislikeBtn.off('click').click(function(event) {
         return randomSelection();
