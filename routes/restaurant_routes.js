@@ -67,6 +67,30 @@ module.exports = function(app) {
                         console.log(newUser);
                 });
         });
+
+        app.delete("/api/restaurants/:id", function(req, res) {
+                db.Restaurant.delete({
+                        id: req.body.id,
+                        name: req.body.name
+                }).then(function(newRestaurant) {
+                        res.json(newRestaurant);
+                        console.log(newRestaurant);
+                        (err => res.status(500).json(err));
+                
+                 });
+        });
+        app.update("/api/resturants/:id", function(req, res) {
+                db.Restaurant.update({
+                        id: req.body.id,
+                        name: req.body.name
+                }).then(function(newRestaurant) {
+                        res.json(newRestaurant);
+                        console.log(newRestaurant);
+                        (err => res.status(500).json(err));
+
+                })
+        });
+
 }
         
 
