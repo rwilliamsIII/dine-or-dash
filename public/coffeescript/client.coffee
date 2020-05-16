@@ -32,7 +32,7 @@ searchRestaurants = ->
         while count <= 50
             if count == 50
                 offset = offset + 50
-                return delay 100, -> searchRestaurants()
+                return delay 1000, -> searchRestaurants()
             else
                 if res.businesses[count] != undefined
                     restaurantArray.push(res.businesses[count])
@@ -66,7 +66,7 @@ nearbyRestaurants = ->
         while count <= 50
             if count == 50
                 offset = offset + 50
-                return delay 100, -> nearbyRestaurants()
+                return delay 1000, -> nearbyRestaurants()
             else
                 if res.businesses[count] != undefined
                     restaurantArray.push(res.businesses[count])
@@ -135,7 +135,6 @@ getCoordinates = ->
             lat: position.coords.latitude
             lng: position.coords.longitude
         }
-        console.log(position)
         lat = pos.lat
         long = pos.lng
         navigator.geolocation.clearWatch(id)
@@ -163,7 +162,6 @@ sendInfo = ->
         name_biz: "#{name_biz}"
         picURL: "#{picURL}"
     .then((res) ->
-        console.log(res)
     )
 
 # Gets the keys from server side
@@ -188,9 +186,6 @@ setCity = ->
 # Randomly selects a restaurant from the generated array of restaurants
 randomSelection = ->
     random = Math.floor(Math.random() * restaurantArray.length)
-    console.log(random)
-    console.log(restaurantArray)
-    console.log(restaurantArray[random])
     selection = restaurantArray.splice(random, 1)
 
 $( document ).ready ->
@@ -199,18 +194,17 @@ $( document ).ready ->
     $("#proximity").click (event) ->
         if JSON.parse(window.localStorage.getItem("Location Services")) != true
             geoConfirm = confirm("This website is requesting your location to provide you with location based services.")
-            console.log(geoConfirm)
             if geoConfirm == true
                 localStorage.setItem("Location Services", JSON.stringify(geoConfirm))
                 geolocate()
                 restaurantArray = []
-                return delay 4000, -> nearbyRestaurants()
+                nearbyRestaurants()
             else if geoConfirm == false
                 alert("Location services were denied, please enter a city.")
         else if JSON.parse(window.localStorage.getItem("Location Services")) == true
             geolocate()
             restaurantArray = []
-            return delay 4000, -> nearbyRestaurants()
+            nearbyRestaurants()
     $("#search").click (event) ->
         restaurantArray = []
         event.preventDefault()

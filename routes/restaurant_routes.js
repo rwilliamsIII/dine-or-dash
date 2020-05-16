@@ -4,36 +4,43 @@ let passport = require("../config/passport");
 
 module.exports = function(app) {
         // Route to check the login credentials
-        app.post("/login", passport.authenticate("local"), function(req, res) {
+        // app.post("/api/login", passport.authenticate("local", { successRedirect: "/", failureRedirect: "/login" }));
+
+        app.post("/api/login", passport.authenticate("local"), function(req, res) {
                 res.json(req.user);
+                res.redirect("/index");
+        });
+
+        // Logs the user out to the login page
+        app.get("/logout", function(req, res) {
+                req.logout();
+                res.redirect("/login");
         });
         // Route to create a user from the sign-up page
-        app.post("/signup", function(req, res) {
+        app.post("/api/signup", function(req, res) {
                 db.User.create({
                   username: req.body.username,
                   password: req.body.password
                 })
-                .then(function() {
-                    res.redirect(307, "/login");
-                })
-                .catch(function(err) {
+                  .then(function() {
+                    res.redirect(307, "/api/login");
+                  })
+                  .catch(function(err) {
                     res.status(401).json(err);
-                });
-        });
-        // Renders the index page
-        // May get removed with passport functionality --- Tim M.
-        app.get("/", function(req, res) {
-                res.render("index");
-        });
-        // Renders the login page
-        // May get removed with passport functionality --- Tim M.
-        app.get("/login", function(req, res) {
-                res.render("login");
-        });
-        // Renders the signup page
-        // I think we will be keeping this --- Tim M.
-        app.get("/signup", function(req, res) {
-                res.render("signup");
+                  });
+              });
+        // Route for getting some data about our user to be used client side
+        app.get("/api/user_data", function(req, res) {
+                if (!req.user) {
+                        // The user is not logged in, send back an empty object
+                        res.json({});
+                } else {
+                        // Otherwise send back the user's username
+                        res.json({
+                        username: req.user.username,
+                        id: req.user.id
+                        });
+                }
         });
         // Sending protected api keys to client side
         app.get("/api/keys", function(req, res) {
