@@ -5,7 +5,6 @@ let passport = require("../config/passport");
 module.exports = function(app) {
         // Route to check the login credentials
         app.post("/api/login", passport.authenticate("local"), function(req, res) {
-                console.log("attempting to auth");
                 res.json(req.user);
         });
 
@@ -22,7 +21,6 @@ module.exports = function(app) {
                         password: req.body.password
                 })
                 .then(function() {
-                        console.log("running signup");
                         res.redirect(307, "/api/login");
                 })
                 .catch(function(err) {

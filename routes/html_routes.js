@@ -6,10 +6,8 @@ module.exports = function(app) {
     app.get("/", function(req, res) {
         // If the user already has an account send them to the main page
         if (req.user) {
-          console.log("/ sending to index verification");
           res.render("index");
         }
-        console.log("/ sending to signup");
         res.render("signup");
     });
 
@@ -17,16 +15,13 @@ module.exports = function(app) {
     app.get("/login", function(req, res) {
         // If the user already has an account send them to the main page
         if (req.user) {
-          console.log("req.user exists");
           res.render("index");
         }
-        console.log("login-failed")
         res.render("login");
     });
 
     // Renders the main page if user is authenticated
     app.get("/index", isAuthenticated, function(req, res) {
-      console.log("index rendering");
         res.render("index")
     });
 
