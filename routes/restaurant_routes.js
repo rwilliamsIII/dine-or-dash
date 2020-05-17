@@ -5,6 +5,7 @@ let passport = require("../config/passport");
 module.exports = function(app) {
         // Route to check the login credentials
         app.post("/api/login", passport.authenticate("local"), function(req, res) {
+                
                 res.json(req.user);
         });
 
@@ -79,17 +80,17 @@ module.exports = function(app) {
                 
                  });
         });
-        app.update("/api/resturants/:id", function(req, res) {
-                db.Restaurant.update({
-                        id: req.body.id,
-                        name: req.body.name
-                }).then(function(newRestaurant) {
-                        res.json(newRestaurant);
-                        console.log(newRestaurant);
-                        (err => res.status(500).json(err));
+        // app.update("/api/resturants/:id", function(req, res) {
+        //         db.Restaurant.update({
+        //                 id: req.body.id,
+        //                 name: req.body.name
+        //         }).then(function(newRestaurant) {
+        //                 res.json(newRestaurant);
+        //                 console.log(newRestaurant);
+        //                 (err => res.status(500).json(err));
 
-                })
-        });
+        //         })
+        // });
 
 }
         
