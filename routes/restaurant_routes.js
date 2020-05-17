@@ -5,7 +5,7 @@ let passport = require("../config/passport");
 module.exports = function(app) {
         // Route to check the login credentials
         app.post("/api/login", passport.authenticate("local"), function(req, res) {
-                
+                console.log("attempting to auth");
                 res.json(req.user);
         });
 
@@ -18,15 +18,16 @@ module.exports = function(app) {
         // Route to create a user from the sign-up page
         app.post("/api/signup", function(req, res) {
                 db.User.create({
-                  username: req.body.username,
-                  password: req.body.password
+                        username: req.body.username,
+                        password: req.body.password
                 })
-                  .then(function() {
-                    res.render("index");
-                  })
-                  .catch(function(err) {
-                    res.status(401).json(err);
-                  });
+                .then(function() {
+                        console.log("running signup");
+                        res.redirect(307, "/api/login");
+                })
+                .catch(function(err) {
+                        res.status(401).json(err);
+                });
               });
 
         // Route for getting some data about our user to be used client side
@@ -50,6 +51,7 @@ module.exports = function(app) {
                 keys.push(process.env.maps);
                 res.json(keys);
         });
+
         app.post("/api/restaurants", function(req, res){
                 db.Restaurant.create({
                         id: req.body.id,
@@ -59,6 +61,7 @@ module.exports = function(app) {
                         console.log(newRestaurant);
                     });
                 });
+
         app.post("/api/users", function(req, res){
                 db.User.create({
                         username: req.body.username,
@@ -80,17 +83,18 @@ module.exports = function(app) {
                 
                  });
         });
-        // app.update("/api/resturants/:id", function(req, res) {
-        //         db.Restaurant.update({
-        //                 id: req.body.id,
-        //                 name: req.body.name
-        //         }).then(function(newRestaurant) {
-        //                 res.json(newRestaurant);
-        //                 console.log(newRestaurant);
-        //                 (err => res.status(500).json(err));
 
-        //         })
-        // });
+        app.update("/api/resturants/:id", function(req, res) {
+                db.Restaurant.update({
+                        id: req.body.id,
+                        name: req.body.name
+                }).then(function(newRestaurant) {
+                        res.json(newRestaurant);
+                        console.log(newRestaurant);
+                        (err => res.status(500).json(err));
+
+                })
+        });
 
 }
         

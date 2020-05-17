@@ -5,7 +5,6 @@
   $("form.login").submit(function(event) {
     var password, userData, username;
     event.preventDefault();
-    console.log("clicked");
     username = $("input[name='username']");
     password = $("input[name='password']");
     userData = {
@@ -25,6 +24,7 @@
       username: username,
       password: password
     }).then(function(res) {
+      console.log("something");
       return window.location.replace("/index");
     });
   };

@@ -1,6 +1,5 @@
 $("form.login").submit (event) ->
     event.preventDefault()
-    console.log("clicked")
     username = $("input[name='username']")
     password = $("input[name='password']")
     userData = {
@@ -21,5 +20,6 @@ loginUser = (username, password) ->
         password: password
     })
     .then((res) ->
+        console.log("something");
         window.location.replace("/index")
     )
