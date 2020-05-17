@@ -8,20 +8,24 @@ passport.use("local", new LocalStrategy(
       username: "username",
     },
     function(username, password, done) {
+      console.log("passport obtaining from db");
       // When a user tries to sign in this code runs
       db.User.findOne({
         where: {
           username: username
         }
       }).then(function(dbUser) {
+        console.log(dbUser);
         // If there's no user with the given username
         if (!dbUser) {
+          console.log("no user in db");
           return done(null, false, {
             message: "Incorrect Username!"
           });
         }
         // If there is a user with the given email, but the password the user gives us is incorrect
         else if (!dbUser.validPassword(password)) {
+          console.log("not a valid password");
           return done(null, false, {
             message: "Incorrect Password!"
           });
