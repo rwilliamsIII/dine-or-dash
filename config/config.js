@@ -1,11 +1,12 @@
+require('dotenv').config();
 module.exports = {
   "development": {
-    "username": "root",
-    "password": "password",
-    "database": "restaurant_db",
-    "host": "localhost",
-    "port": 3306,
-    "dialect": "mysql"
+    "username": process.env.username,
+    "password": process.env.password,
+    "database": process.env.database,
+    "host": process.env.host,
+    "port": process.env.port,
+    "dialect": process.env.dialect
   },
   "test": {
     "username": "root",
@@ -16,11 +17,11 @@ module.exports = {
     "dialect": "mysql"
   },
   "production": {
-    "username": "dlubgk1zp0j1nw85",
-    "password": "pm5lykpwcc94p9sj",
-    "database": "wh9vaw41o85ds5ll",
-    "host": "qzkp8ry756433yd4.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    "port": 3306,
-    "dialect": "mysql"
+    "username": process.env.JAWSusername,
+    "password": process.env.JAWSpassword,
+    "database": process.env.JAWSdatabase,
+    "host": process.env.JAWShost,
+    "port": process.env.JAWSport,
+    "dialect": process.env.JAWSdialect
   }
 };
