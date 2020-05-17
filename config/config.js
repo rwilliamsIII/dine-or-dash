@@ -1,7 +1,7 @@
 module.exports = {
   "development": {
     "username": "root",
-    "password": "bear",
+    "password": "password",
     "database": "restaurant_db",
     "host": "localhost",
     "port": 3306,
