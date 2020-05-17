@@ -20,5 +20,5 @@ signUpUser = (username, password) ->
       password: password
     })
       .then((data) ->
-        window.location.replace("/login")
+        window.location.replace("/index")
       )
