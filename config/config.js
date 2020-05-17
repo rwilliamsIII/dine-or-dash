@@ -21,7 +21,7 @@ module.exports = {
     "password": process.env.JAWS_PASSWORD,
     "database": process.env.JAWS_DATABASE,
     "host": process.env.JAWS_HOST,
-    "port": process.env.JAWS_HOST,
+    "port": process.env.JAWS_PORT,
     "dialect": process.env.JAWS_DIALECT
   }
 };
