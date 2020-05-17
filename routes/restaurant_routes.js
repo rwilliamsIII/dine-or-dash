@@ -84,7 +84,7 @@ module.exports = function(app) {
                  });
         });
 
-        app.update("/api/resturants/:id", function(req, res) {
+        app.put("/api/resturants/:id", function(req, res) {
                 db.Restaurant.update({
                         id: req.body.id,
                         name: req.body.name
