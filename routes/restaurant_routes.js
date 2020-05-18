@@ -3,9 +3,21 @@ require('dotenv').config();
 let passport = require("../config/passport");
 
 module.exports = function(app) {
+        
         // Route to check the login credentials
         app.post("/api/login", passport.authenticate("local"), function(req, res) {
                 res.json(req.user);
+        });
+
+        // Displays the card template handlebar
+        app.get("/api/card", function(req, res) {
+                db.Restaurant.findAll({where: {liked: true}}).then(function (restaurants) {
+                        var restaurants = restaurants;
+                        console.log(restaurants);
+                        res.render("card", {restaurants: {eaten, notEaten}});
+                }).error(function (err) {
+                        console.log("Error:" + err);
+                });             
         });
 
         // Logs the user out to the login page
@@ -26,20 +38,6 @@ module.exports = function(app) {
                 .catch(function(err) {
                         res.status(401).json(err);
                 });
-        });
-
-        // Route for getting some data about our user to be used client side
-        app.get("/api/user_data", function(req, res) {
-                if (!req.user) {
-                        // The user is not logged in, send back an empty object
-                        res.json({});
-                } else {
-                        // Otherwise send back the user's username
-                        res.json({
-                        username: req.user.username,
-                        id: req.user.id
-                        });
-                }
         });
 
         // Sending protected api keys to client side
