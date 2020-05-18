@@ -26,7 +26,7 @@ module.exports = function(app) {
                 .catch(function(err) {
                         res.status(401).json(err);
                 });
-              });
+        });
 
         // Route for getting some data about our user to be used client side
         app.get("/api/user_data", function(req, res) {
@@ -58,8 +58,9 @@ module.exports = function(app) {
                         res.json(newRestaurant);
                         console.log(newRestaurant);
                     });
-                });
-
+        });
+        
+        // Creates a new user in the Users table
         app.post("/api/users", function(req, res){
                 db.User.create({
                         username: req.body.username,
