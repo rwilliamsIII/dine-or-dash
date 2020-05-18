@@ -52,7 +52,7 @@ module.exports = function(app) {
 
         app.post("/api/restaurants", function(req, res){
                 db.Restaurant.create({
-                        id: req.body.id,
+                        resID: req.body.id,
                         name: req.body.name
                 }).then(function(newRestaurant) {
                         res.json(newRestaurant);

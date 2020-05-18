@@ -77,12 +77,13 @@
       likeBtn = $("<button>").text("Dine!");
       dislikeBtn = $("<button>").text("Dash!");
       likeBtn.off('click').click(function(event) {
+        randomSelection();
         var id, name;
         event.preventDefault();
         id = restaurantArray[0].id;
         name = restaurantArray[0].name;
-        sendInfo(id, name);
-        return randomSelection();
+        console.log(id, name);
+        // sendInfo(id, name);
       });
       dislikeBtn.off('click').click(function(event) {
         return randomSelection();
@@ -128,9 +129,11 @@
       likeBtn = $("<button>").text("Dine!");
       dislikeBtn = $("<button>").text("Dash!");
       likeBtn.off('click').click(function(event) {
+        randomSelection();
         var id, name;
-        id = restaurantArray[0].name;
-        name = restaurantArray[0].id;
+        id = restaurantArray[0].id;
+        name = restaurantArray[0].name;
+        console.log(id, name);
         sendInfo(id, name);
         return randomSelection();
       });
