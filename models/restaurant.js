@@ -17,10 +17,12 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         liked: {
-            type: DataTypes.BOOLEAN
+            type: DataTypes.BOOLEAN,
+            allowNull: false
         },
         favorited: {
-            type: DataTypes.BOOLEAN
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     });
     return Restaurant;
