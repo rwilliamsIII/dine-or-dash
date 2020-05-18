@@ -29,8 +29,21 @@
 </form>
 <button id="proximity">Swipe Nearby!</button>
 
-{{card}}
-
 <div class="restaurants">
-
+  
 </div>
+
+{{!-- Restaurant Card --}}
+<section class="hbs-container"></section>
+
+<script id="card-hbs" type="text/x-handlebars-template">
+  <div class="ui card">
+      <div class="image">
+          <img src=\{{imageURL}}>
+      </div>
+      <div class="content">
+          <h1 class="header">\{{name}}</h1>
+      </div>
+     <a href=\{{yelp}}>\{{search}}</a> 
+  </div>
+</script>
