@@ -1,4 +1,9 @@
 var isAuthenticated = require("../config/authenticated");
+const db = require("../models");
+require('dotenv').config();
+let passport = require("../config/passport");
+let Handlebars = require("handlebars");
+Handlebars.registerPartial('card', '{{card}}');
 
 module.exports = function(app) {
 
@@ -34,4 +39,40 @@ module.exports = function(app) {
     app.get("/signup/static", function(req, res) {
       res.render("signup");
     });
+
+    // Renders the liked page
+    app.get("/liked", function(req, res) {
+      res.render("liked");
+    });
+
+    // Renders the liked page
+    app.get("/liked/restaurants", function(req, res) {
+      db.Restaurant.findAll({where: {liked: true}}).then(function(restaurants) {
+        // var restaurantsArray = [];
+        // for (i=0;i<restaurants.length;i++) {
+        //   restaurantsArray.push(restaurants[i].dataValues);
+        // }
+        // res.send(restaurantsArray);
+        res.send(restaurants);
+      }).error(function (err) {
+        console.log("Error:" + err);
+      }); 
+    });
+    
+    // Displays the card template handlebar
+    app.get("/api/card/:id", function(req, res) {
+      var id = req.params.id
+      db.Restaurant.findOne({where: {resID: id}}).then(function(restaurants) {
+        var restaurant = restaurants;
+        var id = restaurant.id;
+        var name = restaurant.name;
+        var yelp = restaurant.yelp_url;
+        var imageURL = restaurant.pic_url;
+        var info = {restaurant: {id, name, yelp, imageURL}};
+        res.send(info);
+      }).error(function (err) {
+        console.log("Error:" + err);
+      });             
+    });
+
 }
