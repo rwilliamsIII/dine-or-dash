@@ -1,6 +1,8 @@
 const db = require("../models");
 require('dotenv').config();
 let passport = require("../config/passport");
+let Handlebars = require("handlebars");
+Handlebars.registerPartial('card', '{{card}}');
 
 module.exports = function(app) {
         
@@ -10,11 +12,16 @@ module.exports = function(app) {
         });
 
         // Displays the card template handlebar
-        app.get("/api/card", function(req, res) {
-                db.Restaurant.findAll({where: {liked: true}}).then(function (restaurants) {
-                        var restaurants = restaurants;
-                        console.log(restaurants);
-                        res.render("card", {restaurants: {eaten, notEaten}});
+        app.get("/api/card/:id", function(req, res) {
+                var id = req.params.id
+                db.Restaurant.findOne({where: {resID: id}}).then(function(restaurants) {
+                        var restaurant = restaurants;
+                        var id = restaurant.id;
+                        var name = restaurant.name;
+                        var yelp = restaurant.yelp_url;
+                        var imageURL = restaurant.pic_url;
+                        var info = {restaurant: {id, name, yelp, imageURL}};
+                        res.send(info);
                 }).error(function (err) {
                         console.log("Error:" + err);
                 });             
@@ -24,6 +31,11 @@ module.exports = function(app) {
         app.get("/logout", function(req, res) {
                 req.logout();
                 res.redirect("/login");
+        });
+
+        // Renders the liked page
+        app.get("/liked", function(req, res) {
+                res.render("liked");
         });
 
         // Route to create a user from the sign-up page
@@ -51,10 +63,13 @@ module.exports = function(app) {
         app.post("/api/restaurants", function(req, res){
                 db.Restaurant.create({
                         resID: req.body.id,
-                        name: req.body.name
+                        name: req.body.name,
+                        pic_url: req.body.picURL,
+                        yelp_url: req.body.yelp,
+                        liked: true,
+                        favorited: false
                 }).then(function(newRestaurant) {
                         res.json(newRestaurant);
-                        console.log(newRestaurant);
                     });
         });
         
