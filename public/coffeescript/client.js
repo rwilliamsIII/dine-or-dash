@@ -198,30 +198,6 @@
     });
   };
 
-  // Displays the card handlebar
-  displayCardAPI = function(id) {
-    console.log(id);
-    return $.get("/api/card/" + id).then(function(res){
-      console.log(res);
-      console.log(res.restaurant.name);
-      // get the template
-      var source = $("#card-hbs").html();
-      // compile template:
-      var template = Handlebars.compile(source)
-      // apply template:
-      var info = {
-        imageURL: res.restaurant.imageURL,
-        name: res.restaurant.name,
-        yelp: res.restaurant.yelp,
-        search: "Get Info"
-      };
-      var context = template(info);
-      console.log(context);
-      // add result to the page:
-      $('.hbs-container').empty().append(context);
-      })
-  };
-
   // Displays the card handlebar w/out api call
   displayCard = function(id) {
     console.log(id);
