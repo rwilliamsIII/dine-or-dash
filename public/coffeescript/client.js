@@ -77,8 +77,12 @@
       likeBtn = $("<button>").text("Dine!");
       dislikeBtn = $("<button>").text("Dash!");
       likeBtn.off('click').click(function(event) {
-        randomSelection();
-        return sendInfo();
+        var id, name;
+        event.preventDefault();
+        id = restaurantArray[0].id;
+        name = restaurantArray[0].name;
+        sendInfo(id, name);
+        return randomSelection();
       });
       dislikeBtn.off('click').click(function(event) {
         return randomSelection();
@@ -124,8 +128,11 @@
       likeBtn = $("<button>").text("Dine!");
       dislikeBtn = $("<button>").text("Dash!");
       likeBtn.off('click').click(function(event) {
-        randomSelection();
-        return sendInfo();
+        var id, name;
+        id = restaurantArray[0].name;
+        name = restaurantArray[0].id;
+        sendInfo(id, name);
+        return randomSelection();
       });
       dislikeBtn.off('click').click(function(event) {
         return randomSelection();
@@ -216,17 +223,13 @@
   };
 
   // Sends the info to be saved to the database for future searches
-  sendInfo = function() {
-    var info;
-    info = [];
-    info.push(selection[0].id);
-    info.push(selection[0].name);
-    info.push(selection[0].image_url);
+  sendInfo = function(id, name) {
     return $.post("/api/restaurants", {
-      id: `${id}`,
-      name_biz: `${name_biz}`,
-      picURL: `${picURL}`
-    }).then(function(res) {});
+      id: id,
+      name: name
+    }).then(function(res) {
+      return console.log(res);
+    });
   };
 
   // Gets the keys from server side
