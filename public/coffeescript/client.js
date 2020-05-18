@@ -86,8 +86,11 @@
       cardDiv.append(restImg, cardContent);
       cardDiv.appendTo(restDiv);
       likeBtn.off('click').click(function(event) {
-        sendInfo();
-
+        var id, name;
+        event.preventDefault();
+        id = restaurantArray[0].id;
+        name = restaurantArray[0].name;
+        sendInfo(id, name);
         return randomSelection();
       });
       dislikeBtn.off('click').click(function(event) {
@@ -143,7 +146,10 @@
       cardDiv.append(restImg, cardContent);
       cardDiv.appendTo(restDiv);
       likeBtn.off('click').click(function(event) {
-        sendInfo();
+        var id, name;
+        id = restaurantArray[0].name;
+        name = restaurantArray[0].id;
+        sendInfo(id, name);
 
         return randomSelection();
       });
@@ -234,16 +240,11 @@
   };
 
   // Sends the info to be saved to the database for future searches
-  sendInfo = function() {
-    var info;
-    info = [];
-    info.push(selection[0].id);
-    info.push(selection[0].name);
-    info.push(selection[0].image_url);
+  sendInfo = function(id, name) {
+    
     return $.post("/api/restaurants", {
-      id: `${id}`,
-      name_biz: `${name_biz}`,
-      picURL: `${picURL}`
+      id: id,
+      name: name
     }).then(function(res) {
       return console.log(res);
     });
