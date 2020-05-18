@@ -122,14 +122,14 @@ getReviews = ->
         console.log(res)
     )
 
-# Gets the users current location for use to display nearby options
+# Gets the users current location to make a call to yelp for nearby restaurants
 getCoordinates = ->
     options = {
         enableHighAccuracy: false,
         timeout: 5000,
     }
     error = (err) ->
-        console.log('ERROR(' + err.code + '): ' + err.message)
+        console.log("ERROR(" + err.code + "): " + err.message)
     success = (position) ->
         pos = {
             lat: position.coords.latitude
@@ -137,7 +137,9 @@ getCoordinates = ->
         }
         lat = pos.lat
         long = pos.lng
+        nearbyRestaurants()
         navigator.geolocation.clearWatch(id)
+    # id must be established after it's parameters are listed
     id = navigator.geolocation.watchPosition(success, error, options)
 
 # Sets up the ability to use geolocation from google maps
@@ -148,6 +150,7 @@ geolocate = ->
         method: "GET"
     })
     .then((res) ->
+        # Gets coordinates and then runs yelp api with the results
         getCoordinates()
     )
 
@@ -183,6 +186,26 @@ setCity = ->
     else 
         alert("You must enter a city! Or select nearby restaurants.")
 
+# Splices disliked restaurants from the database, and checks their logged date to see if they should re-enter the pool
+dislikedRestaurants = ->
+    $.ajax({
+        url: "/api/disliked"
+        cache: true
+        method: "GET"
+    })
+    .then((res) ->
+        dislikedArray = res
+        console.log(dislikedArray)
+        count = 0  
+        countTwo = 0
+        while count < dislikedArray.length
+            while countTwo < restaurantArray.length
+                if restaurantArray[countTwo].id == dislikedArray[count].id
+                    removedArray = removedArray + dislikedArray[count].splice()
+                countTwo++
+            count++
+    )
+        
 # Randomly selects a restaurant from the generated array of restaurants
 randomSelection = ->
     random = Math.floor(Math.random() * restaurantArray.length)
@@ -196,15 +219,15 @@ $( document ).ready ->
             geoConfirm = confirm("This website is requesting your location to provide you with location based services.")
             if geoConfirm == true
                 localStorage.setItem("Location Services", JSON.stringify(geoConfirm))
-                geolocate()
                 restaurantArray = []
-                nearbyRestaurants()
+                geolocate()
             else if geoConfirm == false
                 alert("Location services were denied, please enter a city.")
         else if JSON.parse(window.localStorage.getItem("Location Services")) == true
-            geolocate()
+            console.log("clicked and there is affirmation to geolocation");
             restaurantArray = []
-            nearbyRestaurants()
+            geolocate()
+            
     $("#search").click (event) ->
         restaurantArray = []
         event.preventDefault()
