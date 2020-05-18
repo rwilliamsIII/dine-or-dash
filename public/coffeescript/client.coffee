@@ -162,7 +162,7 @@ sendInfo = ->
     info.push(selection[0].image_url)
     $.post "/api/restaurants",
         id: "#{id}"
-        name_biz: "#{name_biz}"
+        name: "#{name_biz}"
         picURL: "#{picURL}"
     .then((res) ->
     )
