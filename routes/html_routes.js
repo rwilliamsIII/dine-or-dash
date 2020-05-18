@@ -41,18 +41,13 @@ module.exports = function(app) {
     });
 
     // Renders the liked page
-    app.get("/liked", function(req, res) {
+    app.get("/liked", isAuthenticated, function(req, res) {
       res.render("liked");
     });
 
     // Renders the liked page
     app.get("/liked/restaurants", function(req, res) {
       db.Restaurant.findAll({where: {liked: true}}).then(function(restaurants) {
-        // var restaurantsArray = [];
-        // for (i=0;i<restaurants.length;i++) {
-        //   restaurantsArray.push(restaurants[i].dataValues);
-        // }
-        // res.send(restaurantsArray);
         res.send(restaurants);
       }).error(function (err) {
         console.log("Error:" + err);
