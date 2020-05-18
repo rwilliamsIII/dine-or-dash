@@ -7,6 +7,20 @@ module.exports = function(sequelize, DataTypes) {
         name: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        pic_url: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        yelp_url: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        liked: {
+            type: DataTypes.BOOLEAN
+        },
+        favorited: {
+            type: DataTypes.BOOLEAN
         }
     });
     return Restaurant;
