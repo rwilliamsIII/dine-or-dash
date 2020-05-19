@@ -36,12 +36,14 @@
   <button id="proximity">Swipe Nearby!</button>
 </div>
 
+<div class="content"><div id="loader" class="ui disabled text loader">Loading</div></div>
+
 {{!-- Restaurant Card --}}
 <div class="cards-niche">
   <section class="hbs-container"></section>
 </div>
 
-
+<script src="https://code.jquery.com/jquery.js"></script>
 <script id="card-hbs" type="text/x-handlebars-template">
   <div class="wrap">
     <div class="ui centered card">
@@ -57,11 +59,11 @@
         <div class="content info">
           <a class="yelp-link" href=\{{yelp}}>\{{search}}</a> 
         </div>
+        <div class="wrapBtns">
+          <div class="ui buttons restaurants"></div>
+        </div>
     </div>
   </div>
 </script>
-<div class="ui buttons restaurants">
-  
-</div>
 
 
