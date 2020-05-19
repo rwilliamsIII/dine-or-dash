@@ -20,6 +20,13 @@ h1 {
     max-height: 1rem;
     padding: 1.5rem !important;
 }
+.return {
+    margin-left: 0.5rem;
+}
+.wrap {
+    display: flex;
+    justify-content: space-between;
+}
 /* .content {
     background-image: url(https://st3.depositphotos.com/3649089/16657/v/1600/depositphotos_166571356-stock-illustration-red-checkered-texture-restaurant-seamless.jpg) !important;
 } */
@@ -36,14 +43,9 @@ h1 {
 .yelp-link {
     text-align: center;
 }
-#like {
-
-}
-#dislike {
+/* #dislike {
     float: right;
-}
+} */
 #logout {
-    float: right;
-    display: inline-block;
     margin-right: 0.5rem;
 }
