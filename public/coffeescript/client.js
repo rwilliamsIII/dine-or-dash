@@ -77,8 +77,8 @@
       randomSelection();
       id = selection[0].resID;
       displayCard(id);
-      likeBtn = $("<button>").text("Dine!").attr("id", "like");
-      dislikeBtn = $("<button>").text("Dash!").attr("id", "dislike");
+      likeBtn = $("<button>").text("Dine!").attr("id", "like").attr("class", "ui button");
+      dislikeBtn = $("<button>").text("Dash!").attr("id", "dislike").attr("class", "ui button");
       likeBtn.off('click').click(function(event) {
         if (selection != "") {
           console.log(selection);
@@ -115,7 +115,6 @@
     });
   };
 
-  
   // Nearby restaurants search function
   nearbyRestaurants = function() {
     return $.ajax({
@@ -127,7 +126,6 @@
       }
     }).then(function(res) {
       var count, dislikeBtn, likeBtn;
-      $("#proximity").remove();
       console.log(restaurantArray);
       count = 0;
       while (count <= 50) {
@@ -151,8 +149,8 @@
       randomSelection();
       id = selection[0].id;
       displayCard(id);
-      likeBtn = $("<button>").text("Dine!").attr("id", "like");
-      dislikeBtn = $("<button>").text("Dash!").attr("id", "dislike");
+      likeBtn = $("<button>").text("Dine!").attr("id", "like").attr("class", "ui button");
+      dislikeBtn = $("<button>").text("Dash!").attr("id", "dislike").attr("class", "ui button");
       likeBtn.off('click').click(function(event) {
         if (selection != "") {
           console.log(selection);
@@ -188,8 +186,15 @@
       return dislikeBtn.appendTo(restDiv);
     });
   };
+    
+  // Formats page after search event
+  formatPage = function() {
+    $("#returned").remove();
+    $("#city-search").remove();
+    $("#proximity").remove();
+    $("<a>Return to Search</a>").appendTo("#return").attr("href", "/index").attr("id", "returned");
+  };
 
-  
   // Returns a city by using the id stored in mysql. Will want to pull the id from within this function likely
   searchRestaurantsByID = function() {
     return $.ajax({
@@ -224,6 +229,7 @@
     console.log(context);
     // add result to the page:
     $('.hbs-container').empty().append(context);
+    formatPage();
   };
 
   // Gets photos of the restaurant
