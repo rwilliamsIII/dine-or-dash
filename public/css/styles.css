@@ -1,0 +1,49 @@
+h1 {
+    text-align: center;
+}
+.form {
+    margin-top: 1.5rem;
+    display: block;
+    text-align: center;
+}
+.bg-light {
+    margin-bottom: 1rem;
+}
+.cards-niche {
+    justify-content: center;
+}
+.ui.cards>.card>.image {
+    height: 12.5rem;
+    overflow: hidden;
+}
+.info {
+    max-height: 1rem;
+    padding: 1.5rem !important;
+}
+/* .content {
+    background-image: url(https://st3.depositphotos.com/3649089/16657/v/1600/depositphotos_166571356-stock-illustration-red-checkered-texture-restaurant-seamless.jpg) !important;
+} */
+.ui.card>.image{
+    height: 12.5rem;
+    overflow: hidden;
+}
+.hbs-container {
+    text-align: center;
+}
+.hbs-container-liked {
+    text-align: center;
+}
+.yelp-link {
+    text-align: center;
+}
+#like {
+
+}
+#dislike {
+    float: right;
+}
+#logout {
+    float: right;
+    display: inline-block;
+    margin-right: 0.5rem;
+}

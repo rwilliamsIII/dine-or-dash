@@ -1,7 +1,6 @@
 var isAuthenticated = require("../config/authenticated");
 const db = require("../models");
 require('dotenv').config();
-let passport = require("../config/passport");
 let Handlebars = require("handlebars");
 Handlebars.registerPartial('card', '{{card}}');
 
@@ -45,7 +44,7 @@ module.exports = function(app) {
       res.render("liked");
     });
 
-    // Renders the liked page
+    // Renders the liked page restaurants
     app.get("/liked/restaurants", function(req, res) {
       db.Restaurant.findAll({where: {liked: true}}).then(function(restaurants) {
         res.send(restaurants);
@@ -63,7 +62,8 @@ module.exports = function(app) {
         var name = restaurant.name;
         var yelp = restaurant.yelp_url;
         var imageURL = restaurant.pic_url;
-        var info = {restaurant: {id, name, yelp, imageURL}};
+        var rating = restaurant.rating;
+        var info = {restaurant: {id, name, yelp, imageURL, rating}};
         res.send(info);
       }).error(function (err) {
         console.log("Error:" + err);

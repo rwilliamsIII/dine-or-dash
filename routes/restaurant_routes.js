@@ -11,31 +11,10 @@ module.exports = function(app) {
                 res.json(req.user);
         });
 
-        // Displays the card template handlebar
-        app.get("/api/card/:id", function(req, res) {
-                var id = req.params.id
-                db.Restaurant.findOne({where: {resID: id}}).then(function(restaurants) {
-                        var restaurant = restaurants;
-                        var id = restaurant.id;
-                        var name = restaurant.name;
-                        var yelp = restaurant.yelp_url;
-                        var imageURL = restaurant.pic_url;
-                        var info = {restaurant: {id, name, yelp, imageURL}};
-                        res.send(info);
-                }).error(function (err) {
-                        console.log("Error:" + err);
-                });             
-        });
-
         // Logs the user out to the login page
         app.get("/logout", function(req, res) {
                 req.logout();
                 res.redirect("/login");
-        });
-
-        // Renders the liked page
-        app.get("/liked", function(req, res) {
-                res.render("liked");
         });
 
         // Route to create a user from the sign-up page
@@ -66,6 +45,7 @@ module.exports = function(app) {
                         name: req.body.name,
                         pic_url: req.body.picURL,
                         yelp_url: req.body.yelp,
+                        rating: req.body.rating,
                         liked: true,
                         favorited: false
                 }).then(function(newRestaurant) {

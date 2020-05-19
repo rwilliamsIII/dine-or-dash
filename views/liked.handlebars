@@ -20,22 +20,32 @@
 </nav>
 
 {{!-- Restaurant Cards --}}
-<section class="hbs-container-liked"></section>
+<div class="cards-niche">
+  <section class="hbs-container-liked"></section>
+</div>
 
 <script id="cards-hbs" type="text/x-handlebars-template">
+  <div class="ui six doubling cards">
     \{{#each this}}
-        <div class="ui card">
-            <div class="image">
-                <img src=\{{this.pic_url}}>
-            </div>
-            <div class="content">
-                <h1 class="header">\{{this.name}}</h1>
-            </div>
-            <a href=\{{this.yelp_url}}>Get Info</a> 
+        <div class="card">
+          <div class="image">
+              <img src=\{{this.pic_url}} style="min-height: 100%; min-width: 100%;">
+          </div>
+          <div class="content">
+              <h1 class="header">\{{this.name}}</h1>
+          </div>
+          <div class="extra content">
+            <div class="rating">Rating: \{{this.rating}}/5</div>
+          </div>
+          <div class="content info">
+            <a class="yelp-link" href=\{{this.yelp_url}}>Get Info</a> 
+          </div>
         </div>
     \{{/each}}
+  </div>
 </script>
 <script src="https://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">$(document).ready(function(){$(".ui.rating").rating();});</script>
 <script>
     // Displays the card handlebar
 displayCardAPI = function() {
