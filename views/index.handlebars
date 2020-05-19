@@ -19,34 +19,46 @@
   </div>
 </nav>
 
-<h1>Hello!</h1>
-<a class="navbar-brand" href="/logout">
+<a id="logout" href="/logout">
     Logout
 </a>
-<form class="create-form">
-    <div class="form-group">
-        <label for="city">City:</label>
-        <input type="text" id="city" name="name">
-        <button id="search">Search</button>
-    </div>
-</form>
-<button id="proximity">Swipe Nearby!</button>
+<h1>Dine-or-Dash</h1>
 
-<div class="restaurants">
-  
+<div class="form">
+  <form class="create-form">
+      <div class="form-group">
+          <label for="city">City:</label>
+          <input type="text" id="city" name="name">
+          <button id="search">Search</button>
+      </div>
+  </form>
+  <button id="proximity">Swipe Nearby!</button>
 </div>
 
 {{!-- Restaurant Card --}}
-<section class="hbs-container"></section>
+<div class="cards-niche">
+  <section class="hbs-container"></section>
+</div>
+
 
 <script id="card-hbs" type="text/x-handlebars-template">
-  <div class="ui card">
-      <div class="image">
-          <img src=\{{imageURL}}>
-      </div>
-      <div class="content">
-          <h1 class="header">\{{name}}</h1>
-      </div>
-     <a href=\{{yelp}}>\{{search}}</a> 
+  <div class="wrap">
+    <div class="ui centered card">
+        <div class="image">
+            <img src=\{{imageURL}} style="min-height: 100%; min-width: 100%;">
+        </div>
+        <div class="content">
+            <h1 class="header">\{{name}}</h1>
+        </div>
+        <div class="extra content">
+            <div class="rating">Rating: \{{this.rating}}/5</div>
+        </div>
+        <div class="content info">
+          <a class="yelp-link" href=\{{yelp}}>\{{search}}</a> 
+        </div>
+    </div>
   </div>
 </script>
+<div class="restaurants"></div>
+
+
