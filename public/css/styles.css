@@ -47,6 +47,30 @@ h1 {
 .yelp-link {
     text-align: center;
 }
+.d-block {
+    border-radius: 1rem;
+}
+.carousel {
+    width: auto;
+    max-width: 40rem;
+    height: 30rem;
+    max-height: 30rem;
+    margin: 0 auto;
+}
+/* text on carousel */
+.carousel-caption {
+    font-size: 1.5rem;
+}
+.w-100 {
+    width: auto;
+    max-width: 40rem;
+    height: 30rem;
+    max-height: 30rem;
+    margin-top: 1rem;
+}
+.carousel-inner {
+    border-radius: 1rem;
+}
 /* #dislike {
     float: right;
 } */

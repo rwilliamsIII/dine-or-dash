@@ -12,12 +12,9 @@ module.exports = function(app) {
     });
 
     // Sends the user to the login page, if they are logged in then sends them to the main page
-    app.get("/login", function(req, res) {
+    app.get("/login", isAuthenticated, function(req, res) {
         // If the user already has an account send them to the main page
-        if (req.user) {
-          res.render("index");
-        }
-        res.render("login");
+        res.render("index");
     });
 
     // Renders the main page if user is authenticated, else login page is loaded
@@ -26,8 +23,8 @@ module.exports = function(app) {
     });
 
     // Sends the user to the login page
-    app.get("/login/static", function(req, res) {
-      res.render("login");
+    app.get("/login/static", isAuthenticated, function(req, res) {
+      res.render("index");
     });
 
     // Renders the signup page
