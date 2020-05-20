@@ -40,9 +40,11 @@ module.exports = function(app) {
         });
 
         app.post("/api/restaurants", function(req, res){
+                console.log(req);
                 db.Restaurant.create({
                         resID: req.body.id,
                         name: req.body.name,
+                        user: req.user.username,
                         pic_url: req.body.picURL,
                         yelp_url: req.body.yelp,
                         rating: req.body.rating,

@@ -41,8 +41,8 @@ module.exports = function(app) {
     });
 
     // Renders the liked page restaurants
-    app.get("/liked/restaurants", function(req, res) {
-      db.Restaurant.findAll({where: {liked: true}}).then(function(restaurants) {
+    app.get("/liked/restaurants", isAuthenticated, function(req, res) {
+      db.Restaurant.findAll({where: {user: req.user.username}}).then(function(restaurants) {
         res.send(restaurants);
       }).error(function (err) {
         console.log("Error:" + err);
@@ -65,5 +65,4 @@ module.exports = function(app) {
         console.log("Error:" + err);
       });             
     });
-
 }

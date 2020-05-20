@@ -21,7 +21,7 @@
 
 {{!-- Restaurant Cards --}}
 <div class="cards-niche">
-  <section class="hbs-container-liked"></section>
+  <section class="hbs-container-favorites"></section>
 </div>
 
 <script id="cards-hbs" type="text/x-handlebars-template">
@@ -47,7 +47,7 @@
 <script src="https://code.jquery.com/jquery.js"></script>
 <script>
     // Displays the card handlebar
-displayCardAPI = function() {
+displayFavoritesAPI = function() {
     return $.get("/liked").then(function(res){
         $.get("/liked/restaurants").then(function(result){
             for (i=0;i<result.length;i++){
@@ -63,9 +63,9 @@ displayCardAPI = function() {
             var context = template(restaurants);
             // console.log(context);
             // add result to the page:
-            $('.hbs-container-liked').empty().append(context);
+            $('.hbs-container-favorites').empty().append(context);
         })
     });
 };
-displayCardAPI();
+displayFavoritesAPI();
 </script>

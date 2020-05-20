@@ -155,7 +155,6 @@
       name: selection[0].name,
       yelp: selection[0].yelp_url,
       rating: selection[0].rating,
-      search: "Get Info"
     };
     var context = template(info);
     console.log(context);
