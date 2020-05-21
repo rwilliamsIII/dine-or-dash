@@ -120,6 +120,7 @@
 
   // Displays the card handlebar w/out api call
   displayCard = function() {
+    formatPage();
     // get the template
     var source = $("#card-hbs").html();
     // compile template:
@@ -165,9 +166,6 @@
     });
     dislikeBtn.appendTo(restDiv);
     likeBtn.appendTo(restDiv);
-    formatPage();
-    // displayContent();
-    console.log("card-display running");
     $("#loader").removeClass("active").addClass("disabled");
     $('.hbs-container').empty().append(context, dislikeBtn, likeBtn);
     $(".index-card").off("click").click(function(event) {
@@ -186,7 +184,7 @@
   displayContent = function() {
     $("#restaurant-content").attr("style", "display: initial;").transition({
       animation: 'scale',
-      duration   : '1s'
+      duration   : '1.5s'
     });
     category = selection[0].categories[0].title;
   }
