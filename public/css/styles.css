@@ -1,5 +1,6 @@
 h1 {
     text-align: center;
+
 }
 hr {
     margin-top: 0.1rem;
@@ -30,6 +31,7 @@ hr {
 .wrap {
     display: flex;
     justify-content: space-between;
+    background-color: #6C7A89;
 }
 .wrapBtns {
     display: flex;
@@ -117,4 +119,129 @@ hr {
 }
 #logout {
     margin-right: 0.5rem;
+    background-color:#6C7A89;
 }
+
+.navbar-brand{
+    font-family: 'Baloo Chettan 2', cursive !important;
+    font-size: 20px;
+    background-color:#6C7A89;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    background-color: #6C7A89;
+    ;
+  }
+  .main {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+  }
+  .d1 {
+    position: absolute;
+    background-image: url(https://r-cf.bstatic.com/images/hotel/max1280x900/109/109790595.jpg);
+    background-size: 2100px 1100px;
+  
+    height: 30vh;
+    width: 15vw;
+  
+    background-position: 0 50%;
+  
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.8);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    animation: dd1 10s 1, dd12 10s 1;
+    animation-delay: 4s, 14s;
+  }
+  .d2 {
+    position: absolute;
+    background-image: url(https://www.ecopetit.cat/wpic/mpic/359-3592398_restaurant-hd-wallpapers-high-resolution-restaurant-background.jpg);
+    background-size: 2100px 1100px;
+  
+    height: 50vh;
+    width: 25vw;
+  
+    background-position: -10vw 50%;
+    left: 10vw;
+  
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    animation: dd2 10s 2;
+    animation-delay: 4s;
+  }
+  .d3 {
+    position: absolute;
+    background-image: url(https://wallpapercrafter.com/uploads/posts/51877-___cafe-bar-restaurant-and-tables-hd.jpg);
+    background-size: 2700px 1500px;
+    overflow: hidden;
+  
+    height: 100vh;
+    width: 40vw;
+    left: 25vw;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.8);
+    background-position: -35vw 50%;
+  
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    animation: dd3 10s 2;
+    animation-delay: 4s;
+  }
+  .d4 {
+    position: absolute;
+    overflow: hidden;
+    background-image: url(https://cdn.cnn.com/cnnnext/dam/assets/200120161356-cnn-worlds-best-new-restaurants---madera---simon-brown-photography-1-1-full-169.jpg);
+    background-size: 2500px 1100px;
+  
+    height: 80vh;
+    width: 30vw;
+    left: 65vw;
+    background-position: -70vw 50%;
+  
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    animation: dd4 10s 2;
+    animation-delay: 4s;
+  }
+  
+  @keyframes dd1 {
+    0% {
+    }
+    50% {
+      width: 95vw;
+    }
+  }
+  @keyframes dd12 {
+    0% {
+    }
+    50% {
+      background-position: Calc(0vw - 40px) 50%;
+    }
+  }
+  @keyframes dd2 {
+    0% {
+    }
+    50% {
+      background-position: Calc(-10vw - 40px) 50%;
+    }
+  }
+  @keyframes dd3 {
+    0% {
+    }
+    50% {
+      background-position: Calc(-35vw - 40px) 50%;
+    }
+  }
+  @keyframes dd4 {
+    0% {
+    }
+    50% {
+      background-position: Calc(-70vw - 40px) 50%;
+    }
+  }
