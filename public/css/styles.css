@@ -1,6 +1,10 @@
 h1 {
     text-align: center;
 }
+hr {
+    margin-top: 0.1rem;
+    margin-bottom: 0.1rem;
+}
 .form {
     margin-top: 1.5rem;
     display: block;
@@ -54,8 +58,23 @@ h1 {
     z-index: 1000;
 }
 /* text on carousel */
-.carousel-caption {
-    font-size: 1.5rem;
+#wrap-content {
+    font-size: 0.75rem;
+    background-color: white;
+    min-width: 100%;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border: solid 0.25rem black;
+    border-radius: 2rem;
+    color: black;
+}
+#person1, #person2, #person3 {
+    font-size: 0.5rem;
+    margin-top:0.25rem;
+    margin-bottom: 0.25rem;
+}
+#review1, #review2, #review3 {
+    margin-bottom: 0.25rem;
 }
 .active {
     border-radius: 1rem;
