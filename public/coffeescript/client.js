@@ -134,8 +134,12 @@
     };
     var context = template(info);
     // add result to the page: 
-    var likeBtn = $("<button>").text("Dine!").attr("id", "like");
-    var dislikeBtn = $("<button>").text("Dash!").attr("id", "dislike");
+    var iconLiked = $("<i>").attr("class", "utensils icon");
+    var iconDash = $("<i>").attr("class", "shipping fast icon"); 
+    iconLiked.appendTo(likeBtn);
+    iconDash.appendTo(dislikeBtn);
+    var likeBtn = $("<button><i class='huge utensils icon'></i>").attr("id", "like");
+    var dislikeBtn = $("<button><i class='huge shipping fast icon'></i>").attr("id", "dislike");d
     likeBtn.off('click').click(function(event) {
       if (selection != "") {
         // var id, name, picURL, yelp, rating;
