@@ -31,6 +31,10 @@ hr {
 .wrap {
     display: flex;
     justify-content: space-between;
+<<<<<<< HEAD
+=======
+    
+>>>>>>> f6523a349ce864129d2822943ea4a250673d07e6
 }
 .wrapBtns {
     display: flex;
@@ -118,15 +122,27 @@ hr {
 }
 #logout {
     margin-right: 0.5rem;
+<<<<<<< HEAD
+=======
+    background-color: white;
+>>>>>>> f6523a349ce864129d2822943ea4a250673d07e6
 }
 
 .navbar-brand{
-    font-family: 'Baloo Chettan 2', cursive !important;
-    font-size: 20px;
-    background-color:#6C7A89;
+    font-size: 30px;
+    font-family: 'Faster One', cursive;
+    
 }
 
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> f6523a349ce864129d2822943ea4a250673d07e6
 /* * {
     margin: 0;
     padding: 0;
