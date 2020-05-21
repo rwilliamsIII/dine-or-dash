@@ -31,13 +31,6 @@ h1 {
     display: flex;
     justify-content: space-between;
 }
-/* .content {
-    background-image: url(https://st3.depositphotos.com/3649089/16657/v/1600/depositphotos_166571356-stock-illustration-red-checkered-texture-restaurant-seamless.jpg) !important;
-} */
-.ui.centered.card>.image{
-    height: 13.5rem;
-    overflow: hidden;
-}
 .hbs-container {
     text-align: center;
 }
@@ -51,29 +44,58 @@ h1 {
     border-radius: 1rem;
 }
 .carousel {
+    overflow: hidden;
     width: auto;
     max-width: 40rem;
     height: 30rem;
     max-height: 30rem;
     margin: 0 auto;
+    border-radius: 1rem;
+    z-index: 1000;
 }
 /* text on carousel */
 .carousel-caption {
     font-size: 1.5rem;
 }
+.active {
+    border-radius: 1rem;
+}
+.carousel-item {
+    border-radius: 1rem;
+}
 .w-100 {
+    width: auto;
+    max-width: 40rem;
+    height: 29rem;
+    max-height: 29rem;
+    margin-top: 1rem;
+    border-radius: 1rem;
+}
+.carousel-inner {
+    border-radius: 1rem;
+    overflow: hidden;
+}
+#pic1, #pic2, #pic3 {
+    border-radius: 1rem;
+}
+.ui.centered.card{
+    margin-top: 1rem;
     width: auto;
     max-width: 40rem;
     height: 30rem;
     max-height: 30rem;
-    margin-top: 1rem;
-}
-.carousel-inner {
+    margin: 0 auto;
     border-radius: 1rem;
 }
-/* #dislike {
-    float: right;
-} */
+.ui.card>.image:not(.ui)>img {
+    width: 40rem;
+    max-width: 40rem;
+    border: none;
+    max-height: 24rem;
+    border-radius: 1rem;
+    height: 24rem;
+    object-fit: cover;
+}
 #logout {
     margin-right: 0.5rem;
 }

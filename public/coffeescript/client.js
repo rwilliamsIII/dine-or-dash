@@ -189,21 +189,27 @@
     dislikeBtn.appendTo(restDiv);
     likeBtn.appendTo(restDiv);
     formatPage();
-    displayContent();
+    // displayContent();
     $("#loader").removeClass("active").addClass("disabled");
     $('.hbs-container').empty().append(context, dislikeBtn, likeBtn);
+    $(".index-card").off("click").click(function(event) {
+      event.preventDefault();
+      console.log("clicked");
+      $('.card').transition({
+        animation: 'scale',
+        duration   : '0.5s',
+        onComplete : function() {
+          displayContent();
+        }
+      });
+    });
   };
 
   displayContent = function() {
-    $("#restaurant-content").attr("style", "display: initial;");
-    if (selection != "") {
-      getReviews(selection[0].alias);
-      restaurantPhotos(selection[0].alias);
-    }
-    else {
-      getReviews(restaurantArray[0].alias);
-      restaurantPhotos(restaurantArray[0].alias);
-    }
+    $("#restaurant-content").attr("style", "display: initial;").transition({
+      animation: 'scale',
+      duration   : '1s'
+    });
     category = selection[0].categories[0].title;
   }
 
@@ -367,7 +373,15 @@
   randomSelection = function() {
     var random;
     random = Math.floor(Math.random() * restaurantArray.length);
-    return selection = restaurantArray.splice(random, 1);
+    selection = restaurantArray.splice(random, 1);
+    if (selection != "") {
+      getReviews(selection[0].alias);
+      restaurantPhotos(selection[0].alias);
+    }
+    else {
+      getReviews(restaurantArray[0].alias);
+      restaurantPhotos(restaurantArray[0].alias);
+    }
   };
 
   $(document).ready(function() {
@@ -390,7 +404,7 @@
         return geolocate();
       }
     });
-    return $("#search").click(function(event) {
+    $("#search").click(function(event) {
       restaurantArray = [];
       event.preventDefault();
       $("#loader").removeClass("disabled").addClass("active");
@@ -398,5 +412,4 @@
       return $("#city").val("");
     });
   });
-
 }).call(this);
