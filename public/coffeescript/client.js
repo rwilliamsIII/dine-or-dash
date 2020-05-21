@@ -133,9 +133,13 @@
       rating: selection[0].rating,
     };
     var context = template(info);
-    // add result to the page:  
-    var likeBtn = $("<button>").text("Dine!").attr("id", "like").attr("class", "ui button");
-    var dislikeBtn = $("<button>").text("Dash!").attr("id", "dislike").attr("class", "ui button");
+    // add result to the page: 
+    var iconLiked = $("<i>").attr("class", "utensils icon");
+    var iconDash = $("<i>").attr("class", "shipping fast icon"); 
+    iconLiked.appendTo(likeBtn);
+    iconDash.appendTo(dislikeBtn);
+    var likeBtn = $("<button>").text("Dine!").attr("id", "like");
+    var dislikeBtn = $("<button>").text("Dash!").attr("id", "dislike");
     likeBtn.off('click').click(function(event) {
       if (selection != "") {
         // var id, name, picURL, yelp, rating;
