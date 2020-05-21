@@ -31,10 +31,7 @@ hr {
 .wrap {
     display: flex;
     justify-content: space-between;
-<<<<<<< HEAD
-=======
     
->>>>>>> f6523a349ce864129d2822943ea4a250673d07e6
 }
 .wrapBtns {
     display: flex;
@@ -122,10 +119,7 @@ hr {
 }
 #logout {
     margin-right: 0.5rem;
-<<<<<<< HEAD
-=======
     background-color: white;
->>>>>>> f6523a349ce864129d2822943ea4a250673d07e6
 }
 
 .navbar-brand{
@@ -135,14 +129,11 @@ hr {
 }
 
 
-<<<<<<< HEAD
-=======
 
 
 
 
 
->>>>>>> f6523a349ce864129d2822943ea4a250673d07e6
 /* * {
     margin: 0;
     padding: 0;
