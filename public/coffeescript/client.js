@@ -139,7 +139,7 @@
     iconLiked.appendTo(likeBtn);
     iconDash.appendTo(dislikeBtn);
     var likeBtn = $("<button><i class='huge utensils icon'></i>").attr("id", "like");
-    var dislikeBtn = $("<button><i class='huge shipping fast icon'></i>").attr("id", "dislike");d
+    var dislikeBtn = $("<button><i class='huge shipping fast icon'></i>").attr("id", "dislike");
     likeBtn.off('click').click(function(event) {
       if (selection != "") {
         // var id, name, picURL, yelp, rating;
