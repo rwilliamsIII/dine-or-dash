@@ -57,27 +57,12 @@
     }).then(function(res) {
       var count;
       count = 0;
-      while (count <= 50) {
-        if (count === 50) {
-          offset = offset + 50;
-          return delay(1000, function() {
-            return searchRestaurants();
-          });
-        } else {
-          if (res.businesses[count] !== void 0) {
-            restaurantArray.push(res.businesses[count]);
-            count++;
-          } else if (res.businesses[count] === void 0) {
-            return;
-          }
-        }
-        if (offset >= 100) {
-          break;
-        }
+      while (count < 49) {
+          restaurantArray.push(res.businesses[count]);
+          count++;
       }
       randomSelection();
-      id = selection[0].resID;
-      displayCard(id);
+      displayCard();
     });
   };
 
@@ -93,27 +78,12 @@
     }).then(function(res) {
       var count;
       count = 0;
-      while (count <= 50) {
-        if (count === 50) {
-          offset = offset + 50;
-          return delay(1000, function() {
-            return nearbyRestaurants();
-          });
-        } else {
-          if (res.businesses[count] !== void 0) {
-            restaurantArray.push(res.businesses[count]);
-            count++;
-          } else if (res.businesses[count] === void 0) {
-            return;
-          }
-        }
-        if (offset >= 100) {
-          break;
-        }
+      while (count < 49) {
+          restaurantArray.push(res.businesses[count]);
+          count++;
       }
       randomSelection();
-      id = selection[0].id;
-      displayCard(id);
+      displayCard();
     });
   };
     
@@ -122,6 +92,15 @@
     $("#returned").remove();
     $("#city-search").remove();
     $("#proximity").remove();
+    $("#pic1").attr("src", "");
+    $("#pic2").attr("src", "");
+    $("#pic3").attr("src", "");
+    $("#person1").text("");
+    $("#person2").text("");
+    $("#person3").text("");
+    $("#review1").text("");
+    $("#review2").text("");
+    $("#review3").text("");
     $("<a>Return to Search</a>").appendTo("#return").attr("href", "/index").attr("id", "returned");
   };
 
@@ -140,7 +119,7 @@
   };
 
   // Displays the card handlebar w/out api call
-  displayCard = function(id) {
+  displayCard = function() {
     // get the template
     var source = $("#card-hbs").html();
     // compile template:
@@ -180,16 +159,15 @@
       }
     });
     dislikeBtn.off('click').click(function(event) {
-      var id;
       event.preventDefault();
       randomSelection();
-      id = selection[0].id;
-      displayCard(id);
+      displayCard();
     });
     dislikeBtn.appendTo(restDiv);
     likeBtn.appendTo(restDiv);
     formatPage();
     // displayContent();
+    console.log("card-display running");
     $("#loader").removeClass("active").addClass("disabled");
     $('.hbs-container').empty().append(context, dislikeBtn, likeBtn);
     $(".index-card").off("click").click(function(event) {
@@ -197,7 +175,7 @@
       console.log("clicked");
       $('.card').transition({
         animation: 'scale',
-        duration   : '0.5s',
+        duration   : '0.50s',
         onComplete : function() {
           displayContent();
         }
@@ -227,9 +205,6 @@
       pic1 = res.photos[0];
       pic2 = res.photos[1];
       pic3 = res.photos[2];
-      $("#pic1").attr("src", "");
-      $("#pic2").attr("src", "");
-      $("#pic3").attr("src", "");
       $("#pic1").attr("src", pic1);
       $("#pic2").attr("src", pic2);
       $("#pic3").attr("src", pic3);
@@ -252,15 +227,9 @@
       person1 = res.reviews[0].user.name;
       person2 = res.reviews[1].user.name;
       person3 = res.reviews[2].user.name;
-      $("#person1").text("");
-      $("#person2").text("");
-      $("#person3").text("");
       $("#person1").text(person1);
       $("#person2").text(person2);
       $("#person3").text(person3);
-      $("#review1").text("");
-      $("#review2").text("");
-      $("#review3").text("");
       $("#review1").text(review1);
       $("#review2").text(review2);
       $("#review3").text(review3);
