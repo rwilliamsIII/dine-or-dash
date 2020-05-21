@@ -34,8 +34,8 @@ module.exports = function(app) {
         // Sending protected api keys to client side
         app.get("/api/keys", function(req, res) {
                 keys = [];
-                keys.push(process.env.yelp);
-                keys.push(process.env.maps);
+                keys.push(process.env.YELP_KEY);
+                keys.push(process.env.MAPS_KEY);
                 res.json(keys);
         });
 
