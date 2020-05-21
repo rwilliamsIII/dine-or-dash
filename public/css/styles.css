@@ -27,7 +27,7 @@ h1 {
 .wrap {
     display: flex;
     justify-content: space-between;
-    background-color: #6C7A89;
+    
 }
 .wrapBtns {
     display: flex;
@@ -100,17 +100,22 @@ h1 {
 }
 #logout {
     margin-right: 0.5rem;
-    background-color:#6C7A89;
+    background-color: white;
 }
 
 .navbar-brand{
-    font-family: 'Baloo Chettan 2', cursive !important;
-    font-size: 20px;
-    background-color:#6C7A89;
+    font-size: 30px;
+    font-family: 'Faster One', cursive;
+    
 }
 
 
-* {
+
+
+
+
+
+/* * {
     margin: 0;
     padding: 0;
     background-color: #6C7A89;
@@ -225,4 +230,4 @@ h1 {
     50% {
       background-position: Calc(-70vw - 40px) 50%;
     }
-  }
+  } */
