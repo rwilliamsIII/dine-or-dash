@@ -31,7 +31,6 @@ hr {
 .wrap {
     display: flex;
     justify-content: space-between;
-    background-color: #6C7A89;
 }
 .wrapBtns {
     display: flex;
@@ -119,7 +118,6 @@ hr {
 }
 #logout {
     margin-right: 0.5rem;
-    background-color:#6C7A89;
 }
 
 .navbar-brand{
@@ -129,18 +127,18 @@ hr {
 }
 
 
-* {
+/* * {
     margin: 0;
     padding: 0;
     background-color: #6C7A89;
     ;
-  }
-  .main {
+  } */
+  /* .main {
     height: 100vh;
     width: 100vw;
     position: relative;
-  }
-  .d1 {
+  } */
+  /* .d1 {
     position: absolute;
     background-image: url(https://r-cf.bstatic.com/images/hotel/max1280x900/109/109790595.jpg);
     background-size: 2100px 1100px;
@@ -244,4 +242,4 @@ hr {
     50% {
       background-position: Calc(-70vw - 40px) 50%;
     }
-  }
+  } */
