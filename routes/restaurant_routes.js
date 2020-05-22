@@ -31,6 +31,19 @@ module.exports = function(app) {
                 });
         });
 
+        // Route to create a comment on a restaurant
+        app.post("/api/comments", function(req, res) {
+                db.Comments.create({
+                        resID: req.body.resID.attr,
+                        user: req.user.username,
+                        comment: req.body.comment
+                })
+                .then(function(comment) {
+                        console.log(comment);
+                        res.json(comment);
+                })
+        });
+
         // Sending protected api keys to client side
         app.get("/api/keys", function(req, res) {
                 keys = [];

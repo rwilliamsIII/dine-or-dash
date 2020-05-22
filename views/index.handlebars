@@ -30,12 +30,9 @@
   <form class="create-form">
       <div class="form-group">
         <div class="ui large icon input">
-  <input type="text" id="city" name="name" placeholder="Search city">
-  <button id="search"><i class="search icon"></i></button>
-</div>
-          {{!-- <label for="city">City:</label>
-          <input type="text" id="city" name="name">
-          <button id="search">Search</button> --}}
+          <input type="text" id="city" name="name" placeholder="Search city">
+          <button id="search"><i class="search icon"></i></button>
+        </div>
       </div>
   </form>
   <button id="proximity">Swipe Nearby!</button>
@@ -51,7 +48,7 @@
 <script src="https://code.jquery.com/jquery.js"></script>
 <script id="card-hbs" type="text/x-handlebars-template">
   <div class="wrap">
-    <div class="ui centered card">
+    <div class="ui centered grey card">
         <div class="image index-card" style="min-width: 100%">
             <img src=\{{imageURL}}>
         </div>
@@ -69,17 +66,25 @@
   <div class="container">
     <div id="restaurant-content"  style="display: none;">
       <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+        <div class="carousel-inner">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
           <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
         </ol>
-        <div class="carousel-inner">
           <div class="carousel-item active">
             <img id="pic1" class="d-block w-100">
             <div class="carousel-caption d-none d-md-block">
               <div id="wrap-content">
-                <h5 id="person1"></h5>
+                <h4 id="person1"></h4>
                 <hr>
                 <p id="review1"></p>
               </div>
@@ -89,7 +94,7 @@
             <img id="pic2" class="d-block w-100">
             <div class="carousel-caption d-none d-md-block">
               <div id="wrap-content">
-                <h5 id="person2"></h5>
+                <h4 id="person2"></h4>
                 <hr>
                 <p id="review2"></p>
               </div>
@@ -99,23 +104,44 @@
             <img id="pic3" class="d-block w-100">
             <div class="carousel-caption d-none d-md-block">
               <div id="wrap-content">
-                <h5 id="person3"></h5>
+                <h4 id="person3"></h4>
                 <hr>
                 <p id="review3"></p>
               </div>
             </div>
           </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
       </div>
     </div>
   </div>
 </script>
- {{!-- style="min-height: 100%; min-width: 100%;" --}}
+
+{{!-- Comment feed --}}
+<div class="comments-feed">
+  <section class="hbs-container-comments"></section>
+</div>
+
+<script id="comments-hbs" type="text/x-handlebars-template">
+  \{{#each this}}
+    <div class="ui feed">
+      <div class="event">
+        <div class="content">
+          <div class="summary">
+            <p class="user">
+              \{{user}}
+            </p>
+            <div class="date">
+              @ \{{createdAt}}
+            </div>
+          </div>
+          <div class="meta">
+            <p class="comment">
+              \{{comment}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  \{{/each}}
+</script>
+<script src="https://code.jquery.com/jquery.js"></script>
