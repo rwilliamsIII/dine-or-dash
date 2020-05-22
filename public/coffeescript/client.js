@@ -139,7 +139,7 @@
     iconLiked.appendTo(likeBtn);
     iconDash.appendTo(dislikeBtn);
     var likeBtn = $("<button><i class='huge utensils icon'></i>").attr("id", "like");
-    var dislikeBtn = $("<button><i class='huge shipping fast icon'></i>").attr("id", "dislike");d
+    var dislikeBtn = $("<button><i class='huge shipping fast icon'></i>").attr("id", "dislike");
     likeBtn.off('click').click(function(event) {
       if (selection != "") {
         // var id, name, picURL, yelp, rating;
@@ -175,7 +175,7 @@
     $(".index-card").off("click").click(function(event) {
       event.preventDefault();
       console.log("clicked");
-      $('.card').transition({
+      $(".card").transition({
         animation: 'scale',
         duration   : '0.50s',
         onComplete : function() {
@@ -187,8 +187,8 @@
 
   displayContent = function() {
     $("#restaurant-content").attr("style", "display: initial;").transition({
-      animation: 'scale',
-      duration   : '1.5s'
+      animation: "scale",
+      duration   : "1.5s"
     });
     category = selection[0].categories[0].title;
   }
@@ -346,13 +346,35 @@
     random = Math.floor(Math.random() * restaurantArray.length);
     selection = restaurantArray.splice(random, 1);
     if (selection != "") {
+      templateComments(selection[0].id);
       getReviews(selection[0].alias);
       restaurantPhotos(selection[0].alias);
     }
     else {
+      templateComments(restaurantArray[0].id);
       getReviews(restaurantArray[0].alias);
       restaurantPhotos(restaurantArray[0].alias);
     }
+  };
+
+  // Displays the comments handlebar
+  templateComments = function(id) {
+    $.get("/comments/restaurants" + id).then(function(result){
+      if (result != undefined) {
+        for (i=0;i<result.length;i++){
+          console.log(result[i]);
+        };
+        // get the template
+        var source = $("#comments-hbs").html();
+        // compile template:
+        var template = Handlebars.compile(source)
+        // apply template:
+        var comments = result;
+        var context = template(comments);
+        // add result to the page:
+        $('.hbs-container-comments').empty().append(context);
+      }
+    })
   };
 
   $(document).ready(function() {
