@@ -45,7 +45,16 @@ module.exports = function(app) {
         console.log("Error:" + err);
       }); 
     });
-    
+  
+    // Renders the liked page restaurants
+    app.get("/comments/restaurants:id", isAuthenticated, function(req, res) {
+      db.Comments.findAll({where: {resID: req.params.id}}).then(function(comments) {
+        res.send(comments);
+      }).error(function (err) {
+        console.log("Error:" + err);
+      }); 
+    });
+
     // Displays the card template handlebar
     app.get("/api/card/:id", function(req, res) {
       var id = req.params.id
