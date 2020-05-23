@@ -44,6 +44,10 @@
 <div class="cards-niche">
   <section class="hbs-container"></section>
 </div>
+{{!-- Comment feed --}}
+<div class="comments-feed">
+  <section class="hbs-container-comments"></section>
+</div>
 
 <script src="https://code.jquery.com/jquery.js"></script>
 <script id="card-hbs" type="text/x-handlebars-template">
@@ -116,11 +120,6 @@
   </div>
 </script>
 
-{{!-- Comment feed --}}
-<div class="comments-feed">
-  <section class="hbs-container-comments"></section>
-</div>
-
 <script id="comments-hbs" type="text/x-handlebars-template">
   \{{#each this}}
     <div class="ui feed">
@@ -131,7 +130,7 @@
               \{{user}}
             </p>
             <div class="date">
-              @ \{{createdAt}}
+              on  
             </div>
           </div>
           <div class="meta">

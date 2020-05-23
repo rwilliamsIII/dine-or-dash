@@ -121,11 +121,17 @@ hr {
     height: 24rem;
     object-fit: cover;
 }
+.ui.feed {
+    font-size: 2rem;
+    width: 57%;
+    margin: auto;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+}
 #logout {
     margin-right: 0.5rem;
     background-color: white;
 }
-
 .navbar-brand{
     font-size: 30px;
     font-family: 'Faster One', cursive;

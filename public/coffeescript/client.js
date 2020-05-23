@@ -360,9 +360,13 @@
   // Displays the comments handlebar
   templateComments = function(id) {
     $.get("/comments/restaurants" + id).then(function(result){
+      var timeArray = [];
       if (result != undefined) {
+        // Formatting date of the user review
         for (i=0;i<result.length;i++){
-          console.log(result[i]);
+          var date = new Date(result[i].createdAt).toDateString();
+          date.slice(0, -36);
+          timeArray.push(date);
         };
         // get the template
         var source = $("#comments-hbs").html();
@@ -373,6 +377,10 @@
         var context = template(comments);
         // add result to the page:
         $('.hbs-container-comments').empty().append(context);
+        // Displaying times for the user reviews based on idexes
+        for (i=0;i<timeArray.length;i++) {
+          $(".date:eq(" + i + ")").append(timeArray[i]);
+        }
       }
     })
   };
