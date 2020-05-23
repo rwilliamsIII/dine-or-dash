@@ -134,7 +134,7 @@
     };
     var context = template(info);
     // add result to the page: 
-    var likeBtn = $("<button>").text("Dine!").attr("id", "like");
+    var likeBtn = $("<button><i class='utensils icon'></i>").text("Dine!").attr("id", "like");
     var dislikeBtn = $("<button>").text("Dash!").attr("id", "dislike");
     likeBtn.off('click').click(function(event) {
       if (selection != "") {
