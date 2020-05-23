@@ -18,7 +18,10 @@ Full stack application that allows users to "swipe" on restaurants that are arou
 ES6,Node.JS,GitHUB,Heroku,MySql,Passport.js,Yelp API,Sequelize,Jaws_DB,CoffeeScript,Geolocation,SemanticUI,Bootstrap
 
 ## <h2 id="contributors">Contributors</h2>
-[rwilliamsIII](rwilliamsIII)[timothymickiewicz](timothymickiewicz)[iean-hennig](iean-hennig)[Loki-Malone](Loki-Malone)
+[rwilliamsIII](rwilliamsIII)
+[timothymickiewicz](timothymickiewicz)
+[iean-hennig](iean-hennig)
+[Loki-Malone](Loki-Malone)
 
 ## <h2 id="contact">Contact</h2>
 
