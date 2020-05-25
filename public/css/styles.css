@@ -16,6 +16,8 @@ hr {
 }
 .cards-niche {
     justify-content: center;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
 }
 .ui.cards>.card>.image {
     height: 12.5rem;
@@ -103,16 +105,17 @@ hr {
     margin-bottom: 1rem;
     padding-top: 1rem;
 }
-i.icon, i.icons {
-    font-size: 2rem;
-    position: absolute;
-    top: 0;
-    right: -5px;
-}
 .navbar-brand{
     font-size: 30px;
     font-family: 'Faster One', cursive;
     
+}
+.bg-dark {
+    margin-bottom: 0.25rem;
+}
+.content {
+    padding: 0.1rem!important;
+    padding-top: 0.4rem!important;
 }
 #logout {
     margin-right: 0.5rem;
@@ -127,6 +130,26 @@ i.icon, i.icons {
     width: 20rem;
     background-color: #C0C0C0!important;
     border-bottom-left-radius: 1rem;
+}
+#favorite {
+    font-size: 2rem;
+    position: absolute;
+    top: 4px;
+    left: 0px;
+    color: lightpink;
+}
+#favorite:hover {
+    color: red;
+  }
+#delete {
+    font-size: 2rem;
+    position: absolute;
+    top: 0;
+    right: -5px;
+    color: white
+}
+#delete:hover {
+    color: black;
 }
 /* text on carousel */
 #wrap-content {
