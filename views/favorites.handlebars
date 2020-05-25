@@ -32,7 +32,8 @@
     \{{#each this}}
         <div class="card">
           <div class="image">
-              <img src=\{{this.pic_url}} style="min-height: 100%; min-width: 100%;">
+              <img style="background-image: url(\{{this.pic_url}}); background-size: cover;
+              background-position: center;">
           </div>
           <div class="content">
               <h1 class="header">\{{this.name}}</h1>
