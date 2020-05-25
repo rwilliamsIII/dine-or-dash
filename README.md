@@ -33,9 +33,9 @@ ES6,Node.JS,GitHUB,Heroku,MySql,Passport.js,Yelp API,Sequelize,Jaws_DB,CoffeeScr
 
 * #### Name: Timothy Mickiewicz
 * #### GitHUB: https://github.com/timothymickiewicz
-* #### Portfolio: []()
-* #### Email: 
-* #### LinkedIN:
+* #### Portfolio: [https://timothymickiewicz.github.io/](https://timothymickiewicz.github.io/)
+* #### Email: timothy.mickiewicz@gmail.com
+* #### LinkedIN: [https://www.linkedin.com/in/timothymickiewicz1995/](https://www.linkedin.com/in/timothymickiewicz1995/)
 
 * #### Name: Iean Hennig
 * #### GitHUB: https://github.com/iean-hennig
