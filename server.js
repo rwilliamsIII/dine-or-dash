@@ -29,7 +29,7 @@ app.engine("handlebars", exphbs({
 app.set("view engine", "handlebars");
 
 // We need to use sessions to keep track of our user's login status
-app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true, cookie: { maxAge: 60000 }}));
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true, cookie: { maxAge: 100000 }}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -38,7 +38,7 @@ app.use(flash());
 require("./routes/html_routes")(app);
 require("./routes/restaurant_routes")(app);
 
-// Syncing our database and logging a message to the user upon success
+// Syncing our database
 db.sequelize.sync().then(function() {
   app.listen(PORT, function() {
     console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
