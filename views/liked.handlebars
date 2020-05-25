@@ -13,7 +13,10 @@
         <a class="nav-link" href="/signup/static">Signup</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/liked">View Liked Restaurants</a>
+        <a class="nav-link" href="/liked">Liked Restaurants</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/favorites">Favorite Restaurants</a>
       </li>
     </ul>
   </div>
@@ -29,6 +32,7 @@
     \{{#each this}}
         <div class="card" data-attr=\{{this.resID}}>
           <div class="image">
+            <i id="favorite" class="heart icon"></i>
             <i id="delete" class="window close icon"></i>
             <img src=\{{this.pic_url}} style="min-height: 100%; min-width: 100%;">
           </div>
@@ -93,7 +97,7 @@ deleteRestaurant = function(resID) {
 })
 }
 
-// Sends the comment to be displayed
+// Sends the comment to be displayed while swiping
 sendComment = function(resID, comment) {
   return $.post("/api/comments", {
     resID: resID,
@@ -102,6 +106,17 @@ sendComment = function(resID, comment) {
 
   });
 };
+
+// Favorites a restaurant to be displayed on the favorites page
+favoriteRestaurant = function(resID) {
+  $.ajax({
+     url : '/api/restaurants',
+     method : 'put',
+     data : {
+        id : resID
+     }
+})
+}
 
 // Have to access the buttons via the document's scope
 $(document).on("click", ".commentBtn", function(event) {
@@ -117,6 +132,14 @@ $(document).on("click", "#delete", function(event) {
   var resID = $(this).parent().parent().data();
   console.log(resID);
   deleteRestaurant(resID);
+  $(this).parent().parent().remove();
+});
+
+$(document).on("click", "#favorite", function(event) {
+  event.preventDefault();
+  var resID = $(this).parent().parent().data();
+  console.log(resID);
+  favoriteRestaurant(resID);
   $(this).parent().parent().remove();
 });
 

@@ -86,17 +86,19 @@ module.exports = function(app) {
                 });
         });
 
-        app.put("/api/resturants/:id", function(req, res) {
-                db.Restaurant.update({
-                        id: req.body.id,
-                        name: req.body.name
-                }).then(function(newRestaurant) {
-                        res.json(newRestaurant);
-                        console.log(newRestaurant);
-                        (err => res.status(500).json(err));
-
+        app.put("/api/restaurants", function(req, res) {
+                console.log(req.body.id.attr)
+                db.Restaurant.findOne({
+                        where: {resID: req.body.id.attr}      
+                }).then(function(alteredRestaurant) {
+                        alteredRestaurant.update({
+                                liked: false,
+                                favorited: true 
+                        }).then(function(response) {
+                                res.json(response);
+                                console.log(response);
+                        })
+                        // (err => res.status(500).json(err));
                 })
         });
 }
-        
-
