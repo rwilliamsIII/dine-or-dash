@@ -29,7 +29,8 @@
     \{{#each this}}
         <div class="card" data-attr=\{{this.resID}}>
           <div class="image">
-              <img src=\{{this.pic_url}} style="min-height: 100%; min-width: 100%;">
+            <i id="delete" class="window close icon"></i>
+            <img src=\{{this.pic_url}} style="min-height: 100%; min-width: 100%;">
           </div>
           <div class="content">
               <h1 class="header">\{{this.name}}</h1>
@@ -81,6 +82,17 @@ displayCardAPI = function() {
     });
 };
 
+// Deletes from the database
+deleteRestaurant = function(resID) {
+  $.ajax({
+     url : '/api/restaurants',
+     method : 'delete',
+     data : {
+        id : resID
+     }
+})
+}
+
 // Sends the comment to be displayed
 sendComment = function(resID, comment) {
   return $.post("/api/comments", {
@@ -91,12 +103,21 @@ sendComment = function(resID, comment) {
   });
 };
 
+// Have to access the buttons via the document's scope
 $(document).on("click", ".commentBtn", function(event) {
   event.preventDefault();
   var comment = $(this).parent().find("textarea").val();
   var resID = $(this).parent().data();
   sendComment(resID, comment);
   $(this).parent().find(".comment").val("");
+});
+
+$(document).on("click", "#delete", function(event) {
+  event.preventDefault();
+  var resID = $(this).parent().parent().data();
+  console.log(resID);
+  deleteRestaurant(resID);
+  $(this).parent().parent().remove();
 });
 
 displayCardAPI();

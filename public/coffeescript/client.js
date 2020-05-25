@@ -361,7 +361,7 @@
   templateComments = function(id) {
     $.get("/comments/restaurants" + id).then(function(result){
       var timeArray = [];
-      if (result != undefined) {
+      if (result) {
         // Formatting date of the user review
         for (i=0;i<result.length;i++){
           var date = new Date(result[i].createdAt).toDateString();
