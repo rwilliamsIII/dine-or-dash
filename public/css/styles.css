@@ -4,6 +4,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    text-align: center;
 }
 h1 {
     text-align: center;
@@ -17,6 +18,10 @@ hr {
     margin-top: 1.5rem;
     display: block;
     text-align: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 40%;
 }
 .bg-light {
     margin-bottom: 1rem;
@@ -128,6 +133,29 @@ hr {
     padding: 0.2rem;
     padding-top: 0.4rem!important;
     text-align: center;
+}
+.feed {
+    max-width: 40rem;
+    border: black solid 0.25rem;
+    background-color: whitesmoke;
+    border-radius: 1rem;
+}
+.ui.feed {
+    padding-top: 0;
+}
+.ui.feed>.event>.content .summary {
+    font-size: 0.75em;
+}
+#wrap-att {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+#proximity {
+    margin-top: 2rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 #logout {
     margin-right: 0.5rem;
