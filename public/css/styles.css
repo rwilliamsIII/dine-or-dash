@@ -114,8 +114,9 @@ hr {
     margin-bottom: 0.25rem;
 }
 .content {
-    padding: 0.1rem!important;
+    padding: 0.2rem;
     padding-top: 0.4rem!important;
+    text-align: center;
 }
 #logout {
     margin-right: 0.5rem;

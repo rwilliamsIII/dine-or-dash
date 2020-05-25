@@ -37,38 +37,8 @@ module.exports = function(app) {
       res.render("liked");
     });
 
-    // Renders the liked page restaurants
-    app.get("/liked/restaurants", isAuthenticated, function(req, res) {
-      db.Restaurant.findAll({where: {user: req.user.username}}).then(function(restaurants) {
-        res.send(restaurants);
-      }).error(function (err) {
-        console.log("Error:" + err);
-      }); 
-    });
-  
-    // Renders the liked page restaurants
-    app.get("/comments/restaurants:id", isAuthenticated, function(req, res) {
-      db.Comments.findAll({where: {resID: req.params.id}}).then(function(comments) {
-        res.send(comments);
-      }).error(function (err) {
-        console.log("Error:" + err);
-      }); 
-    });
-
-    // Displays the card template handlebar
-    app.get("/api/card/:id", function(req, res) {
-      var id = req.params.id
-      db.Restaurant.findOne({where: {resID: id}}).then(function(restaurants) {
-        var restaurant = restaurants;
-        var id = restaurant.id;
-        var name = restaurant.name;
-        var yelp = restaurant.yelp_url;
-        var imageURL = restaurant.pic_url;
-        var rating = restaurant.rating;
-        var info = {restaurant: {id, name, yelp, imageURL, rating}};
-        res.send(info);
-      }).error(function (err) {
-        console.log("Error:" + err);
-      });             
+    // Renders the favorites page
+    app.get("/favorites", isAuthenticated, function(req, res) {
+      res.render("favorites");
     });
 }
