@@ -3,6 +3,7 @@ require('dotenv').config();
 let passport = require("../config/passport");
 let Handlebars = require("handlebars");
 Handlebars.registerPartial('card', '{{card}}');
+var isAuthenticated = require("../config/authenticated");
 
 module.exports = function(app) {
         
@@ -100,5 +101,49 @@ module.exports = function(app) {
                         })
                         // (err => res.status(500).json(err));
                 })
+        });
+
+        // Renders the liked page restaurants
+        app.get("/liked/restaurants", isAuthenticated, function(req, res) {
+                db.Restaurant.findAll({where: {liked: true}}).then(function(likedRestaurants) {
+                        res.send(likedRestaurants);
+                        }).error(function (err) {
+                        console.log("Error:" + err);
+                        }); 
+        });
+        
+        // Renders the favorites page restaurants
+        app.get("/favorites/restaurants", isAuthenticated, function(req, res) {
+                db.Restaurant.findAll({where: {favorited: true}}).then(function(favoriteRestaurants) {
+                        res.send(favoriteRestaurants);
+                }).error(function (err) {
+                        console.log("Error:" + err);
+                }); 
+        });
+        
+        // Renders the liked page restaurants
+        app.get("/comments/restaurants:id", isAuthenticated, function(req, res) {
+                db.Comments.findAll({where: {resID: req.params.id}}).then(function(comments) {
+                        res.send(comments);
+                }).error(function (err) {
+                        console.log("Error:" + err);
+                }); 
+        });
+        
+        // Displays the card template handlebar
+        app.get("/api/card/:id", function(req, res) {
+                var id = req.params.id
+                db.Restaurant.findOne({where: {resID: id}}).then(function(restaurants) {
+                        var restaurant = restaurants;
+                        var id = restaurant.id;
+                        var name = restaurant.name;
+                        var yelp = restaurant.yelp_url;
+                        var imageURL = restaurant.pic_url;
+                        var rating = restaurant.rating;
+                        var info = {restaurant: {id, name, yelp, imageURL, rating}};
+                        res.send(info);
+                }).error(function (err) {
+                        console.log("Error:" + err);
+                });             
         });
 }
