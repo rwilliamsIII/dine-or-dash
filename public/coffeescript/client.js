@@ -207,9 +207,9 @@
       pic1 = res.photos[0];
       pic2 = res.photos[1];
       pic3 = res.photos[2];
-      $("#pic1").attr("src", pic1);
-      $("#pic2").attr("src", pic2);
-      $("#pic3").attr("src", pic3);
+      $("#pic1").attr("style", "background-image: url(" + pic1 + ");'");
+      $("#pic2").attr("style", "background-image: url(" + pic2 + ");'");
+      $("#pic3").attr("style", "background-image: url(" + pic3 + ");'");
     });
   };
 
