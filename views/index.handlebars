@@ -21,12 +21,14 @@
     </ul>
   </div>
 </nav>
+
 <div class="wrap">
   <div id="return"></div>
   <a id="logout" href="/logout">
       Logout
   </a>
 </div>
+
 <h1>Dine-or-Dash</h1>
 
 <div class="form" id="city-search">
@@ -37,47 +39,38 @@
   <button class="ui button" id="proximity">Swipe Nearby!</button>
 </div>
 
-{{!-- <div class="form" id="city-search">
-  <form class="create-form">
-      <div class="form-group">
-        <div class="ui large icon input">
-          <input type="text" id="city" name="name" placeholder="Search city">
-          <button id="search"><i class="search icon"></i></button>
-        </div>
-      </div>
-  </form>
-  <button id="proximity">Swipe Nearby!</button>
-</div> --}}
-
 <div class="content"><div id="loader" class="ui disabled text loader">Loading</div></div>
 
 {{!-- Restaurant Card --}}
 <div class="cards-niche">
   <section class="hbs-container"></section>
 </div>
+
 {{!-- Comment feed --}}
 <div class="comments-feed">
   <section class="hbs-container-comments"></section>
 </div>
 
 <script src="https://code.jquery.com/jquery.js"></script>
+
 <script id="card-hbs" type="text/x-handlebars-template">
   <div class="wrap">
     <div class="ui centered grey card">
-        <div class="image index-card" style="min-width: 100%">
-            <img src=\{{imageURL}}>
-        </div>
-        <div class="content">
-            <h1 class="header">\{{name}}</h1>
-        </div>
-        <div class="extra content">
-            <div class="rating">Rating: \{{this.rating}}/5</div>
-        </div>
-        <div class="wrapBtns">
-          <div class="ui buttons restaurants"></div>
-        </div>
+      <div class="image index-card" style="min-width: 100%">
+          <img src=\{{imageURL}}>
+      </div>
+      <div class="content">
+          <h1 class="header">\{{name}}</h1>
+      </div>
+      <div class="extra content">
+          <div class="rating">Rating: \{{this.rating}}/5</div>
+      </div>
+      <div class="wrapBtns">
+        <div class="ui buttons restaurants"></div>
+      </div>
     </div>
   </div>
+
   <div class="container">
     <div id="restaurant-content"  style="display: none;">
       <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
@@ -155,4 +148,5 @@
     </div>
   \{{/each}}
 </script>
+
 <script src="https://code.jquery.com/jquery.js"></script>
