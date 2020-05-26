@@ -152,6 +152,26 @@
     $('.hbs-container').empty().append(context, dislikeBtn, likeBtn)
     $('.index-card').off('click').click(function (event) {
       event.preventDefault()
+      likeBtn.transition({
+        animation: 'scale',
+        duration: '0.50s',
+        onComplete: function () {
+          likeBtn.transition({
+            animation: 'zoom',
+            duration: '1.5s'
+          })
+        }
+      })
+      dislikeBtn.transition({
+        animation: 'scale',
+        duration: '0.50s',
+        onComplete: function () {
+          dislikeBtn.transition({
+            animation: 'zoom',
+            duration: '1.5s'
+          })
+        }
+      })
       $('.card').transition({
         animation: 'scale',
         duration: '0.50s',
