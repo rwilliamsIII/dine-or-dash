@@ -30,43 +30,42 @@
 <script id="cards-hbs" type="text/x-handlebars-template">
   <div class="ui six doubling cards">
     \{{#each this}}
-        <div class="card">
-          <div class="image">
-              <img style="background-image: url(\{{this.pic_url}}); background-size: cover;
-              background-position: center;">
-          </div>
-          <div class="content">
-              <h1 class="header">\{{this.name}}</h1>
-          </div>
-          <div class="content info">
-            <a class="yelp-link" href=\{{this.yelp_url}}>Get Info</a> 
-          </div>
+      <div class="card">
+        <div class="image">
+          <img style="background-image: url(\{{this.pic_url}}); background-size: cover;
+          background-position: center;">
         </div>
+        <div class="content">
+          <h1 class="header">\{{this.name}}</h1>
+        </div>
+        <div class="content info">
+          <a class="yelp-link" href=\{{this.yelp_url}}>Get Info</a> 
+        </div>
+      </div>
     \{{/each}}
   </div>
 </script>
+
 <script src="https://code.jquery.com/jquery.js"></script>
+
 <script>
-    // Displays the card handlebar
+// Displays the card handlebar
 displayFavorites = function() {
-    return $.get("/favorites").then(function(res){
-        $.get("/favorites/restaurants").then(function(result){
-            for (i=0;i<result.length;i++){
-                console.log(result[i]);
-            }
-            // get the template
-            var source = $("#cards-hbs").html();
-            // compile template:
-            var template = Handlebars.compile(source)
-            // apply template:
-            var restaurants = result;
-            console.log(restaurants[0].resID);
-            var context = template(restaurants);
-            // console.log(context);
-            // add result to the page:
-            $('.hbs-container-favorites').empty().append(context);
-        })
-    });
+  return $.get("/favorites").then(function(res){
+    $.get("/favorites/restaurants").then(function(result){
+      // get the template
+      var source = $("#cards-hbs").html();
+      // compile template:
+      var template = Handlebars.compile(source)
+      // apply template:
+      var restaurants = result;
+      var context = template(restaurants);
+      // add result to the page:
+      $('.hbs-container-favorites').empty().append(context);
+    })
+  });
 };
+
 displayFavorites();
+
 </script>

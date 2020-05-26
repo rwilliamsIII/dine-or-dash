@@ -30,119 +30,105 @@
 <script id="cards-hbs" type="text/x-handlebars-template">
   <div class="ui six doubling cards">
     \{{#each this}}
-        <div class="card" data-attr=\{{this.resID}}>
-          <div class="image">
-            <i id="favorite" class="heart icon"></i>
-            <i id="delete" class="window close icon"></i>
-            <img style="background-image: url(\{{this.pic_url}}); background-size: cover;
-            background-position: center;">
-          </div>
-          <div class="content">
-              <h1 class="header">\{{this.name}}</h1>
-          </div>
-          <div class="content info">
-            <a class="yelp-link" href=\{{this.yelp_url}}>Get Info</a> 
-          </div>
-          <div class="ui form">
-            <div class="field">
-              <label>Leave a Review!</label>
-              <textarea class="comment" rows="2"></textarea>
-            </div>
-            {{!-- <div class="ui success message hidden">
-              <div class="header">Review Submitted!</div>
-              <p>Thank you for reviewing! Your contribution has been logged.</p>
-            </div>
-            <div class="ui error message hidden">
-              <div class="header">Unable to Submit</div>
-              <p>Something has gone wrong on our end. Please try again later!</p>
-            </div> --}}
-          </div>
-          <button class="ui submit button commentBtn">Post Review</button>
+      <div class="card" data-attr=\{{this.resID}}>
+        <div class="image">
+          <i id="favorite" class="heart icon"></i>
+          <i id="delete" class="window close icon"></i>
+          <img style="background-image: url(\{{this.pic_url}}); background-size: cover;
+          background-position: center;">
         </div>
+        <div class="content">
+            <h1 class="header">\{{this.name}}</h1>
+        </div>
+        <div class="content info">
+          <a class="yelp-link" href=\{{this.yelp_url}}>Get Info</a> 
+        </div>
+        <div class="ui form">
+          <div class="field">
+            <label>Leave a Review!</label>
+            <textarea class="comment" rows="2"></textarea>
+          </div>
+        </div>
+        <button class="ui submit button commentBtn">Post Review</button>
+      </div>
     \{{/each}}
   </div>
 </script>
+
 <script src="https://code.jquery.com/jquery.js"></script>
+
 <script>
-    // Displays the card handlebar
-displayCardAPI = function() {
+  // Displays the card handlebar
+  displayCardAPI = function() {
     return $.get("/liked").then(function(res){
-        $.get("/liked/restaurants").then(function(result){
-            for (i=0;i<result.length;i++){
-                console.log(result[i]);
-            }
-            console.log(result);
-            // get the template
-            var source = $("#cards-hbs").html();
-            // compile template:
-            var template = Handlebars.compile(source)
-            // apply template:
-            var restaurants = result;
-            console.log(restaurants[0].resID);
-            var context = template(restaurants);
-            // console.log(context);
-            // add result to the page:
-            $('.hbs-container-liked').empty().append(context);
-        })
+      $.get("/liked/restaurants").then(function(result){
+        // get the template
+        var source = $("#cards-hbs").html();
+        // compile template:
+        var template = Handlebars.compile(source)
+        // apply template:
+        var restaurants = result;
+        var context = template(restaurants);
+        // add result to the page:
+        $('.hbs-container-liked').empty().append(context);
+      })
     });
-};
+  };
 
-// Deletes from the database
-deleteRestaurant = function(resID) {
-  $.ajax({
-     url : '/api/restaurants',
-     method : 'delete',
-     data : {
-        id : resID
-     }
-})
-}
+  // Deletes from the database
+  deleteRestaurant = function(resID) {
+    $.ajax({
+      url : '/api/restaurants',
+      method : 'delete',
+      data : {
+          id : resID
+      }
+  })
+  }
 
-// Sends the comment to be displayed while swiping
-sendComment = function(resID, comment) {
-  return $.post("/api/comments", {
-    resID: resID,
-    comment: comment,
-  }).then(function(res) {
+  // Sends the comment to be displayed while swiping
+  sendComment = function(resID, comment) {
+    return $.post("/api/comments", {
+      resID: resID,
+      comment: comment,
+    }).then(function(res) {
 
+    });
+  };
+
+  // Favorites a restaurant to be displayed on the favorites page
+  favoriteRestaurant = function(resID) {
+    $.ajax({
+      url : '/api/restaurants',
+      method : 'put',
+      data : {
+          id : resID
+      }
+    })
+  }
+
+  // Have to access the buttons via the document's scope
+  $(document).on("click", ".commentBtn", function(event) {
+    event.preventDefault();
+    var comment = $(this).parent().find("textarea").val();
+    var resID = $(this).parent().data();
+    sendComment(resID, comment);
+    $(this).parent().find(".comment").val("");
   });
-};
 
-// Favorites a restaurant to be displayed on the favorites page
-favoriteRestaurant = function(resID) {
-  $.ajax({
-     url : '/api/restaurants',
-     method : 'put',
-     data : {
-        id : resID
-     }
-})
-}
+  $(document).on("click", "#delete", function(event) {
+    event.preventDefault();
+    var resID = $(this).parent().parent().data();
+    deleteRestaurant(resID);
+    $(this).parent().parent().remove();
+  });
 
-// Have to access the buttons via the document's scope
-$(document).on("click", ".commentBtn", function(event) {
-  event.preventDefault();
-  var comment = $(this).parent().find("textarea").val();
-  var resID = $(this).parent().data();
-  sendComment(resID, comment);
-  $(this).parent().find(".comment").val("");
-});
+  $(document).on("click", "#favorite", function(event) {
+    event.preventDefault();
+    var resID = $(this).parent().parent().data();
+    favoriteRestaurant(resID);
+    $(this).parent().parent().remove();
+  });
 
-$(document).on("click", "#delete", function(event) {
-  event.preventDefault();
-  var resID = $(this).parent().parent().data();
-  console.log(resID);
-  deleteRestaurant(resID);
-  $(this).parent().parent().remove();
-});
-
-$(document).on("click", "#favorite", function(event) {
-  event.preventDefault();
-  var resID = $(this).parent().parent().data();
-  console.log(resID);
-  favoriteRestaurant(resID);
-  $(this).parent().parent().remove();
-});
-
-displayCardAPI();
+  displayCardAPI();
 </script>
