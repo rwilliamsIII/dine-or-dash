@@ -116,6 +116,15 @@
     $(this).parent().find(".comment").val("");
   });
 
+  // Touch event
+  $(document).on("touchstart", ".commentBtn", function(event) {
+    event.preventDefault();
+    var comment = $(this).parent().find("textarea").val();
+    var resID = $(this).parent().data();
+    sendComment(resID, comment);
+    $(this).parent().find(".comment").val("");
+  });
+
   $(document).on("click", "#delete", function(event) {
     event.preventDefault();
     var resID = $(this).parent().parent().data();
@@ -123,7 +132,23 @@
     $(this).parent().parent().remove();
   });
 
+  // Touch event
+  $(document).on("touchstart", "#delete", function(event) {
+    event.preventDefault();
+    var resID = $(this).parent().parent().data();
+    deleteRestaurant(resID);
+    $(this).parent().parent().remove();
+  });
+
   $(document).on("click", "#favorite", function(event) {
+    event.preventDefault();
+    var resID = $(this).parent().parent().data();
+    favoriteRestaurant(resID);
+    $(this).parent().parent().remove();
+  });
+
+  // Touch event
+  $(document).on("touchstart", "#favorite", function(event) {
     event.preventDefault();
     var resID = $(this).parent().parent().data();
     favoriteRestaurant(resID);

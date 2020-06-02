@@ -7,7 +7,7 @@ var isAuthenticated = require('../config/authenticated')
 
 module.exports = function (app) {
   // Route to check the login credentials
-  app.post('/api/login', passport.authenticate('local'), function (req, res) {
+  app.post('/api/login', passport.authenticate('local', {failureFlash : true}), function (req, res) {
     res.json(req.user)
   })
 
