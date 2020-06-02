@@ -30,9 +30,9 @@ app.set('view engine', 'handlebars')
 
 // We need to use sessions to keep track of our user's login status
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie: { maxAge: 100000 } }))
+app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(flash())
 
 // Requiring our routes
 require('./routes/html_routes')(app)
